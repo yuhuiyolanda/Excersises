@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            background-color: rgb(0,0,0,0.08);
+        }
+    ul{
+        list-style-type: none;
+        padding: 0;
+       display: inline-block;
+    }
+    ul ul{
+        display:none;
+    }
+    li:hover {
+        background-color: orange;
+    }
+    li:hover > ul{
+        display: block;
+    }
+  li{
+      position: relative;
+      white-space: nowrap;
+  }
+ li>ul{
+     position: absolute;
+     top: 0;
+     left: 100%;
+ }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>文件
+            <ul>
+                <li>打开</li>
+                <li>保存
+                    <ul>
+                        <li>UTF-8
+                            <ul>
+                                <li>with bom
+                                    <ul>
+                                        <li>aaa</li>
+                                        <li>bbb</li>
+                                        <li>ccc</li>
+                                    </ul>
+                                </li>
+                                <li>with out of bom</li>
+                            </ul>
+                        </li>
+                            
+                        <li>ANSI</li>
+                        <li>UTF-8 with bom</li>
+                    </ul>
+                </li>
+                <li>另存为...</li>
+            </ul>
+        </li>
+        
+        <li>编辑</li>
+        <li>查找</li>
+        <li>选择</li>
+    </ul>
+</body>
+</html>
