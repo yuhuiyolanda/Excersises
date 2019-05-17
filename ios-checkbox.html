@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    .a{
+        width: 400px;
+        height: 200px;
+        border-radius: 109px;
+        background-color:#dddddd;
+        position: relative;
+    }
+    .b{
+        width: 180px;
+        height: 180px;
+        background-color:white;
+        border-radius: 50%;
+        position: absolute;
+        top: 10px;
+        left: 18px;
+        box-shadow: 5px 0px 10px gray;
+    }
+    input:checked + div.a .b{        
+       left: 50%;
+        top: 10px;
+        transition: .66s;
+    }
+    input:checked+div.a {
+        background-color:#6edd5e ;
+    }
+   /* inputchecked后面可以怎么写，可以写上一级元素的变化吗 */
+
+    </style>
+</head>
+<body>
+<label for="ck"> 
+        <input type="checkbox" id="ck" hidden>
+<div class="a">     
+        <div class="b"></div>
+       
+</div>
+</label>
+</body>
+</html>
