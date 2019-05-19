@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>QQ-Mail行内+块级,不用定位</title>
+  <style>
+    html{
+    height:100%;
+    width: 100%;
+    }
+    body{    
+      height:100%;
+      width: 100%;    
+    }
+    body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{
+        margin:0;padding:0
+    }
+    a{
+      text-decoration: none;
+    }
+    header{
+        width: 100%;
+        height: 60px;
+        /* background-color: pink; */
+    }
+    .header-info{
+        display: inline-block;
+        vertical-align: 80%;
+        font-size: 15px;
+    }
+    .header-info a{
+        font-size: 12px;
+    }
+    .header-right{      
+        /* background-color: yellow;       */
+        float: right;
+        font-size: 12px;
+        text-align: right;
+        width:400px; 
+        margin-top: 10px;
+       
+    }
+    .header-right img{
+      
+      width: 8px;
+      height: 16px;
+    }
+    .header-right input{
+      width: 360px;
+      height: 15px;
+    }
+    main{
+        height:calc(100% - 70px);
+        width: calc(100% - 15px);
+        background-color:#89b5e9;
+        border: 5px solid #89b5e9;   
+        border-top-left-radius: 10px;  
+        margin-left: 10px;
+        margin-top:10px;
+    }
+    aside{
+        display: inline-block;
+        height: 100%;
+        width: 74px;
+    
+    }
+    .aside-top{
+        /* height: 120px; */
+        width: 200px;
+        background-color: white;
+        border-radius: 10px;
+        border: 1px solid #6e9dd2;
+        padding: 10px;
+
+    }
+    .aside-bottom{
+        height: 530px;
+        background-color: white;
+        width: 200px;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid #6e9dd2;
+        margin-top: 10px;
+
+    }
+    .small-main{
+      background-color:white;
+      display: inline-block;
+      float: right;
+      height:101%;      
+      width:calc(100% - 230px); 
+      border: 1px solid #6e9dd2;
+      border-top-left-radius: 10px;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+    li{
+      height: 28px;
+      list-style-type: none;
+      line-height: 28px;
+      text-align: left;
+      padding-left: 20px;
+      }
+    li:hover{
+    background-color: #e0ecf9;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://rescdn.qqmail.com/zh_CN/htmledition/images/webp/logo/logo_0_01f1927.png" alt="">
+    
+    <div class="header-info">
+      <p>username<a href="">&lt;1176794277@qq.com&gt;</a></p>                
+      <p><a href="">邮箱首页</a>&nbsp;|&nbsp;<a href="">设置</a>&nbsp;-&nbsp;<a href="">换肤</a></p>
+    </div>
+    <div class="header-right">
+      
+      <img src="https://www.easyicon.net/api/resizeApi.php?id=1228620&size=16" alt="">
+      &nbsp;
+       
+      <a href="">反馈建议</a>
+      &nbsp;|&nbsp;
+      <a href="">帮助中心</a>
+      &nbsp;|&nbsp;
+      <a href="">退出</a>
+      <br>
+      <br>
+      <input type="text" placeholder="邮件全文搜索......">      
+    </div>
+  </header>
+  <main>       
+    <aside>          
+      <ul class="aside-top">
+        <li><a href="">写信</a></li>
+        <li><a href="">收信</a></li>
+        <li><a href="">通讯录</a></li>
+      </ul>
+      <ul class="aside-bottom">
+        <li><a href="">收件箱（89）</a></li>
+        <li><a href="">星标邮件</a></li>
+        <li><a href="">群邮件（35）</a></li>
+        <li><a href="">草稿箱</a></li>
+        <li><a href="">已发送</a></li>
+        <li><a href="">已删除</a></li>
+        <li><a href="">垃圾箱（2）</a></li>
+        <li><a href="">QQ邮件订阅</a></li>
+        <li><a href="">我的文件夹（434）</a></li>
+        <li><a href="">其他邮箱</a></li>
+        <li><a href="">漂流瓶</a></li>
+        <li><a href="">日历</a>|<a href="">记事本</a></li>
+        <li><a href="">在线文档</a></li>
+        <li><a href="">附件收藏</a></li>
+        <li><a href="">文件中转站</a></li>
+        <li><a href="">贺卡</a>|<a href="">明信片</a></li>
+        <li><a href="">阅读空间</a></li>
+      </ul>          
+    </aside>
+    <div class="small-main">
+      <p>上午好，<a href="">username</a></p>
+      <p><a href="">注册英文邮箱账号</a></p>
+     
+     
+    </div>
+  </main>
+</body>
+</html>
