@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+      *{
+        padding: 0px;
+        margin: 0px;
+      }
+      html,body{
+        height: 100%;
+        width: 100%;
+        font-size: 0;
+      }
+      /* 实际开发中，为了更好的还原设计稿，在父元素很有必要设置font-size:0，避免莫名其妙的间距。 */
+      div{
+        box-sizing: border-box;
+        display: inline-block;
+        border-right: 1px solid #ccc;
+        box-shadow: -3px 0 3px #ccc;
+      }
+      .column1{       
+        width:16%;
+        height: 100%;
+        background-color:#eaeef3;      
+      }
+      .column2{
+        width:52%;
+        height: 100%;
+        background-color:white;      
+      }
+      .column2 .top{
+        width: 100%;
+        height: 20%;
+        background-color: white; 
+        box-shadow: 0 3px 3px #ccc;
+      }
+      .column2 .bottom{
+        width: 100%;
+        height: 80%;
+        background-color:white;
+        border-top: 1px solid #ccc;
+      }
+      .column3{
+        width:16%;
+        height: 100%;
+        background-color:#eaeef3;    
+      }
+      .column4{
+        width: 16%;
+        height: 100%;
+        background-color:#eaeef3;       
+      }
+    </style>
+</head>
+<body>
+    <div class="column1"></div>
+    <div class="column2">
+        <div class="top"></div>
+        <div class="bottom"></div>
+    </div>
+    <div class="column3"></div>
+    <div class="column4"></div>
+</body>
+</html>
