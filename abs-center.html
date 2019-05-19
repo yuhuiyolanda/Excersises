@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /* 行内元素居中 */
+       .box1{
+           background-color: pink;
+           width: 200px;
+           height: 200px;
+           text-align: center;
+       }
+       .box1 span{
+           line-height: 200px;           
+       }
+       /* 块级元素inline-block居中 */
+      .box2{
+          background-color: violet;
+          width: 200px;
+          height: 200px;
+          text-align: center;   
+          box-sizing: border-box;           
+          padding-top: 50px;       
+         
+      }
+      .box2 .smallbox{
+          background-color: gray;
+          display: inline-block;
+          height: 100px;
+          width: 100px;          
+       }
+       /* 块级元素定位居中 */
+       .box3{
+           position: relative;
+           width: 200px;
+           height: 200px;
+           background-color: lightblue;
+           margin-top: 10px;
+       }
+       .box3 .smallbox{
+           background-color:gray;
+           position: absolute;
+           width: 100px;
+           height: 100px;
+           top:calc(50% - 50px);
+           right: calc(50% - 50px);           
+       }
+    </style>
+</head>
+<body>
+    <div class="box1">
+        <span>行内元素居中</span>
+    </div>
+    <br>
+    <div class="box2">
+        <div class="smallbox">块级元素inline-block居中</div>        
+    </div>
+    <div class="box3">
+        <div class="smallbox">块级元素定位居中</div>
+    </div>
+</body>
+</html>
