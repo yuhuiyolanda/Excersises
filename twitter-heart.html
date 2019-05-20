@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+     *{
+         background-color: rgba(0,0,0,0.08);
+     }
+    div{
+        width: 100px;
+        height: 100px;
+        border: 1px solid;
+        background-image: url(https://abs.twimg.com/a/1557861269/img/animations/web_heart_animation_edge.png);
+        /* transition: background-position 0.4666s linear; */
+        /* transition: background-position 1s steps(28); */
+    }
+    /* transition要写在hover里，不然鼠标移开后又倒退回到最初的状态 */
+    div:hover{
+        background-position: -2800px 0;
+        transition: background-position .8s steps(28);
+    }
+    </style>
+</head>
+<body>
+    <div></div>
+</body>
+</html>
