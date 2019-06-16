@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script  id="ch0103/01">
+        let A=Number(prompt("A:"));
+        let B=Number(prompt("B:"));
+        console.log(A + B);
+    </script>
+    <script id="ch0103/02">
+        let a=Number(prompt("a:"));
+        let b=Number(prompt("b:"));
+        let c=Number(prompt("c:"));
+       console.log((a + b) * c);
+    </script>
+    <script id="ch0103/03">
+        let a=Number(prompt("a:"));
+        let b=Number(prompt("b:"));
+        let c=Number(prompt("c:"));
+        console.log((a+b)/c);
+    </script>
+    <script id="ch0103/04">
+        let a=Number(prompt("a:"));
+        let b=Number(prompt("b:"));
+        console.log((a - a % b) / b + " " + a % b);
+    </script>
+    <script id="ch0103/05">
+        let a=Number(prompt("a:"));
+        let b=Number(prompt("b:"));
+        console.log((a / b).toFixed(9));
+        // tofixed的作用是保留小数点后几位
+    </script>
+    <script id="ch0103/06">
+        let a=Number(prompt("a:"));
+        let b=Number(prompt("b:"));
+        let per=b / a * 100;
+        console.log(per.toFixed(3) + "%");
+        // 百分号用字符串拼接的方法加上去再输出
+    </script>
+    <script id="ch0103/07">
+        let x=Number(prompt("x:"));
+        let a=Number(prompt("a:"));
+        let b=Number(prompt("b:"));
+        let c=Number(prompt("c:"));
+        let d=Number(prompt("d:"));
+        // console.log((a * x * x * x + b * x * x + c * x + d).toFixed(7));
+        console.log((a * Math.pow(x, 3) + b * Math.pow(x, 2) + c * Math.pow(x, 1) + d).toFixed(7));
+        // 表达几次幂有以上两种方法,可以使用Math.pow,注意M是大写的
+    </script>
+
+    <script id="ch0103/08">
+        let F=Number(prompt("F:"));
+        console.log((5 * (F - 32) / 9).toFixed(5));
+    </script>
+    <script id="ch0103/09">
+        let r=Number(prompt("r:"));
+        console.log((2 * r).toFixed(4) + " " + (2 * 3.14159 * r).toFixed(4) + " " + (3.14159 * Math.pow(r, 2)).toFixed(4));
+        // 注意把整个求得的结果用括号括起来之后再用tofixed
+    </script>
+    <script id="ch0103/10">
+        let r1=Number(prompt("r1:"));
+        let r2=Number(prompt("r2:"));
+        let R= (1 / (1 / r1 + 1 / r2)).toFixed(2);
+        console.log(R);
+        // tofixed可以用在log里输出的时候设置,也可以用在计算的时候
+    </script>
+    <script id="ch0103/11">
+        let a=Number(prompt("a:"));
+        let b=Number(prompt("b:"));
+        console.log((a % b).toFixed(4))
+    </script>
+    <script id="ch0103/12">
+        let r=Number(prompt("r"));
+        console.log((4 / 3 * 3.14 * Math.pow(r, 3)).toFixed(2));
+    </script>
+    <script id="ch0103/13">
+        // 整体思路:字符串-split拆开成数组-reverse颠倒数组顺序-join拼回字符串-输出结果
+        let a=prompt("a");
+        // 这里要的就是字符串,所以不用再转成数值了
+        let arr=a.split("");
+        // split把字符串根据空引号拆分(实际上是每个字符都拆开),变成数组
+        let brr=arr.reverse();
+        // 把数组的顺序颠倒
+        let brrjoin=brr.join("");
+        // 把数组拼接成一个字符串(用空引号拼接,实际上是拼接整个数组为一个字符串)
+        console.log(brrjoin);
+    </script>
+    <script id="ch0103/14">
+        let h=Number(prompt("h"));
+        let r=Number(prompt("r"));
+        let v=Math.PI*Math.pow(r,2)*h/1000;
+        let n=Math.ceil(20/v);
+        // 向上取整用math.ceil
+        console.log(n);
+    </script>
+    <script id="ch0103/15">
+        let n=Number(prompt("n"));
+        let x=Number(prompt("x"));
+        let y=Number(prompt("y"));
+        let num=n-Math.ceil(y/x);
+        console.log(num);
+    </script>
+    <script id="ch0103/16">
+        let xa=Number(prompt("xa"));
+        let ya=Number(prompt("ya"));
+        let xb=Number(prompt("xb"));
+        let yb=Number(prompt("yb"));
+        let length=Math.sqrt(Math.pow((xa-xb),2)+Math.pow((ya-yb),2));
+        console.log(length.toFixed(3));
+    </script>
+    <script id="ch0103/17">
+        let x1=Number(prompt("x1"));
+        let y1=Number(prompt("y1"));
+        let x2=Number(prompt("x2"));
+        let y2=Number(prompt("y2"));
+        let x3=Number(prompt("x3"));
+        let y3=Number(prompt("y3"));
+        // 已知坐标求三角形的公式如下
+        console.log((0.5 * (x1 * y2 + x2 * y3 + x3 * y1 - x1 * y3 - x2 * y1 - x3 * y2)).toFixed(2));
+    </script>
+    <script id="ch0103/18">
+        let a1=Number(prompt("a1"));
+        let a2=Number(prompt("a2"));
+        let n=Number(prompt("n"));
+        let q=a2-a1;
+        console.log(a1 + (n - 1) * q);
+    </script>
+    <script id="ch0103/19">
+        let A=Number(prompt("A"));
+        let B=Number(prompt("B"));
+        console.log(A * B);
+    </script>
+    <script id="ch0103/20">
+        let n=Number(prompt("n"));
+        console.log(Math.pow(2, n));
+    </script>
+
+     1.4 solutions
+    <script id="ch0104/01">
+        let N=Number(prompt("N"));
+        if (N > 0) {
+            console.log("positive")
+        }
+        else if (N < 0) {
+            console.log("negative")
+        }
+        else {
+            console.log("zero")
+        }
+    </script>
+    <script id="ch0104/02">
+        let N=Number(prompt("N"));
+        if (N > 0) {
+            console.log(N.toFixed(2));
+        }
+        else {
+            console.log(-N.toFixed(2));
+        }
+    </script>
+    <script id="ch0104/03">
+        let N=Number(prompt("N"));
+        if(N % 2 == 0){
+            console.log("even");
+        }else{
+            console.log("odd");
+        }
+    </script>
+    <script id="ch0104/04">
+        let N = prompt("N");
+        // ASCII值用charCodeAt来求得
+        ascii = N.charCodeAt();
+        if(ascii % 2 == 0){
+            console.log("NO");
+        }else{
+            console.log("YES");
+        }
+    </script>
+    <script id="ch0104/05">
+        let x =Number(prompt("x"));
+        let y =Number(prompt("y"));
+        if(x > y){
+            console.log(">");
+        }else if(x < y){
+            console.log("<");
+        }else{
+            console.log("=");
+        }
+    </script>
+    <script id="ch0104/06">
+        let n =Number(prompt("n"));
+        if(n > 10 && n < 99){
+            console.log(1);
+        }else{
+            console.log(0);
+        }
+    </script>
+    <script id="ch0104/07">
+        let lucky =Number(prompt("lucky"));
+        let cheerup =Number(prompt("cheerup"));
+        if(lucky>=10||cheerup>=20){
+            console.log(1);
+        }else{
+            console.log(0);
+        }
+    </script>
+    <script id="ch0104/08">
+        let n =Number(prompt("n"));
+        if(n % 3 == 0 && n % 5 == 0){
+            console.log('YES');
+        }else{
+            console.log("NO");
+        }
+    </script>
+    <script id="ch0104/09">
+        // 重点题目:整体框架是一个都不能被整除的输出n,由此确定if和else
+        // 设一个变量为空字符串,条件语句累加字符串,因为需要由小到大输出3,5,7,所以注意if语句的顺序
+        let n =Number(prompt("n"));
+        let print="";
+        if(n % 3 == 0 || n % 5 == 0 || n % 7 == 0){
+           if(n % 3 == 0){
+               print=print + 3;
+           } if(n % 5 == 0){
+               print=print + " " + 5;
+           } if(n % 7 == 0){
+               print=print + " " + 7;
+           }
+           console.log(print);
+       }else{
+           console.log("n");
+       }
+    </script>
+    <script id="ch0104/10">
+        let A =Number(prompt("A"));
+        let B =Number(prompt("B"));
+        if((A < 60 || B < 60)&&(A >= 60 || B>=60 )){
+            console.log(1);
+        }else{
+            console.log(0);
+        }
+    </script>
+    <script id="ch0104/11">
+        let day=Number(prompt("day:"));
+        if(day==1||day==3||day==5){
+            console.log("NO");
+        }else{
+            console.log("YES");
+        }
+    </script>
+    <script id="ch0104/12">
+        let A=Number(prompt("A:"));
+        let timeA=A / 1.2 + 23 +27;
+        let timeB=A / 3;
+        if(timeA > timeB){
+            console.log("Bike");
+        }else if(timeA == timeB){
+            console.log("All");
+        }else{
+            console.log("Walk");
+        }
+    </script>
+    <script id="ch0104/13">
+        let n=Number(prompt("n:"));
+        let fn;
+        // 记得声明新的变量
+        if(0 <= n && n < 5){
+            fn= -n + 2.5;
+        }else if( 5 <= n && n < 10){
+            fn=2 - 1.5 * (n - 3) * (n - 3);
+        }else{
+            fn=n / 2 - 1.5;
+        }
+        console.log(fn.toFixed(3));
+    </script>
+    <script id="ch0104/14">
+        let w=Number(prompt("w:"));
+        let u=prompt("加急与否")
+        let fee;
+        if(w<=1000){
+            fee=8;
+        }else{
+            fee=8+Math.ceil((w-1000)/500)*4;
+        }
+        if(u == "y"){
+            fee=fee+5;
+        }
+        // 注意加急另外收费的5元另起一个if即可
+        console.log(fee);
+    </script>
+    <script id="ch0104/15">
+        let a=Number(prompt("a:"));
+        let b=Number(prompt("b:"));
+        let c=Number(prompt("c:"));
+        let max=a;
+        // 预先设定max=a,再与b和c单独if语句比较
+        if(b>max){
+            max=b;
+        }
+        if(c>max){
+            max=c;
+        }
+        console.log(max);
+    </script>
+    <script id="ch0104/16">
+        let a=Number(prompt("a:"));
+        let b=Number(prompt("b:"));
+        let c=Number(prompt("c:"));
+        // 如何判断三条线段能否组成三角形:满足两边之和大于第三边和两边之差小于第三边即可
+        // 方法一:由于要同时满足两个条件,所以进行if语句的嵌套
+        // if(a + b > c){
+        //    if(Math.abs(a - b)<c){
+        //        // 注意a-b可能是负值,所以要加绝对值符号
+        //        console.log("yes")
+        //    }else(
+        //        console.log("no")
+        //    )
+        // }else{
+        //     console.log("no")
+        // }
+        // 下面是方法二
+        if((a + b > c) && (Math.abs(a - b)<c)){
+            console.log("yes")
+        }else{
+            console.log("no")
+        }
+    </script>
+    <script id="ch0104/17">
+        let year=Number(prompt("year:"));
+        if(year % 400 == 0){
+            console.log("Y");
+        }else if(year % 4==0 && year%100!=0){
+            console.log("Y");
+        }else{
+            console.log("N");
+        }
+    </script>
+    <script id="ch0104/18">
+        let x=Number(prompt("x:"));
+        let y=Number(prompt("y:"));
+        if(Math.abs(x)<=1&&Math.abs(y)<=1){
+            console.log("yes");
+        }else{
+            console.log("no");
+        }
+    </script>
+    <script id="ch0104/19">
+        let a=Number(prompt("a:"));
+        let b=Number(prompt("b:"));
+        let c=prompt("operator:")
+        switch (c) {
+            case "+":
+                console.log(a + b);
+                break;
+            case "-":
+                console.log(a - b);
+                break;
+            case "*":
+                console.log(a * b);
+                break;
+            case "/":
+                if(b==0){
+                    console.log("Divided by zero!");
+                }else{
+                    console.log(a / b);
+                }
+                break;
+            default:
+                console.log("invalid operator!");
+        }
+    <script id="ch0104/20">
+
+        let a=Number(prompt("a:"));
+        let b=Number(prompt("b:"));
+        let c=Number(prompt("c:"));
+        if(Math.pow(b,2)==4*a*c){
+            console.log("x1=x2=" + (-b / 2 * a).toFixed(5));
+        }else if(Math.pow(b,2)>4*a*c){
+            "x1="+(-b / 2 * a).toFixed(5)+"+"+(Math.sqrt(b*b-4*a*c)/2*a).toFixed(5)+";x2="+
+            (-b / 2 * a).toFixed(5)+"-"+(Math.sqrt(b*b-4*a*c)/2*a).toFixed(5);
+        }else{
+            console.log("x1=" + (-b / 2 * a).toFixed(5) + "+" + (Math.sqrt(4 * a * c - b * b) / 2 * a).toFixed(5) + "i;x2=" +
+                (-b / 2 * a).toFixed(5) + "-" + (Math.sqrt(4 * a * c - b * b) / 2 * a).toFixed(5) + "i");
+        }
+    </script>
+    <script id="ch0104/21">
+        let n=Number(prompt("n:"));
+        let x=Number(prompt("x:"));
+        let y=Number(prompt("y:"));
+        console.log(n - Math.ceil(y / x));
+    </script>
+        </head>
+<body>
+
+</body>
+</html>
