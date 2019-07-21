@@ -152,6 +152,90 @@ var yuhuiyolanda = {
       }
       return res + array[i]
    },
+   without:function(array,...values){
+     var res = array.slice()
+     for(var i = 1;i < arguments.length;i++){
+      res = res.filter(it => it != arguments[i])
+     }
+     return res
+   },
+   pull:function(array,...values){
+     var toExclude = []
+     toExclude.push(...values)
+     return array.filter(it => !toExclude.includes(it)) 
+   },
+   sortedIndex:function(array,value){
+     for(var i = 0;i < array.length;i++){
+       if(value == array[i]){
+         return i 
+       }
+       if(array[i + 1] > value && array[i] < value){
+         return i + 1
+       }
+     }
+   },
+
+   union:function(array,...values){
+     var arr = array.concat(...values)
+     var map = {}
+     return arr.filter(it => {
+       if(it in map){
+         return false 
+       }else{
+         map[it] = 1
+         return true 
+       }
+     }
+    )
+   },
+   xor:function(array,...values){
+    var arr = array.concat(...values)
+    var map = {}
+    for(var i = 0;i < arr.length;i++){
+      if(arr[i] in map){
+        map[arr[i]]++
+      }else{
+        map[arr[i]] = 1
+      }
+    }
+    return arr.filter(it => map[it] == 1)
+   },
+   range:function(start = 0,end,step = 1){
+     var res = []
+     for(var i = start;i < end;i+=step){
+       res.push(i)
+     }
+     return res 
+   },
+   omit:function(object,path){
+     var res = {}
+     for(var key in object){
+       if(!path.includes(key)){
+         res[key] = object[key]
+       }
+     }
+     return res 
+   },
+   invert:function(object){
+     var res = {}
+     for(var key in object){
+       res[object[key]] = key 
+     }
+     return res 
+   },
+   max:function(array){
+     return array == []?undefined:array.reduce(function(a,b){
+       if(a > b) {return a}else{return b}
+     })
+   },
+   min:function(array){
+    return array == []?undefined:array.reduce(function(a,b){
+      if(a > b) {return b}else{return a}
+    })
+  },
+  ceil:function(number,precision){
+     return Math.ceil(number * 10 ** precision) /10 ** precision
+  }
   };
    
 
