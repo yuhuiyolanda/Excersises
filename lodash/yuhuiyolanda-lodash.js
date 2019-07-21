@@ -16,7 +16,7 @@ var yuhuiyolanda = {
       return arr.filter(item => !toExclude.includes(item)) 
     },
    //keypoint for drop: 如果 begin 大于原数组的长度，则会返回空数组。
-    drop: function(arr,n){
+    drop: function(arr,n = 1){
       return arr.slice(n)
     },
     dropright:  function(arr,n){
