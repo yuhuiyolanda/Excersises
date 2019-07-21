@@ -76,7 +76,7 @@ var yuhuiyolanda = {
       array.pop()
       return array 
     },
-    interSection:function(...arys){
+    intersection:function(...arys){
       for(var i = 1;i < arguments.length;i++){
        arguments[0] = arguments[0].filter(it => arguments[i].includes(it))
       }
@@ -145,8 +145,13 @@ var yuhuiyolanda = {
         return !f(...args)
       }
     },
-   
-
+    join:function(array,str){
+      var res = ''
+      for(var i = 0;i < array.length - 1;i++){
+         res = res + array[i] + str 
+      }
+      return res + array[i]
+   },
   };
    
 
