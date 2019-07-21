@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+   
+        输入：dropRightWhile([{"user":"barney","active":true},{"user":"fred","active":false},{"user":"pebbles","active":false}],"function(o)  { \n        return  !o.active; \n      }")
+        输出/期望：[{"user":"barney","active":true}]
+        =================
+        输入：dropRightWhile([{"user":"barney","active":true},{"user":"fred","active":false},{"user":"pebbles","active":false}],{"user":"pebbles","active":false})
+        输出/期望：[{"user":"barney","active":true},{"user":"fred","active":false}]
+        =================
+        输入：dropRightWhile([{"user":"barney","active":true},{"user":"fred","active":false},{"user":"pebbles","active":false}],["active",false])
+        输出/期望：[{"user":"barney","active":true}]
+        =================
+        输入：dropRightWhile([{"user":"barney","active":true},{"user":"fred","active":false},{"user":"pebbles","active":false}],"active")
+        输出/期望：[{"user":"barney","active":true},{"user":"fred","active":false},{"user":"pebbles","active":false}]
+        
+        源码：
+        function(ary, predicate = this.identity) {
+            var func = this.iteratee(predicate)
+            for (var i = ary.length - 1; i >= 0; i--) {
+                if (!func(ary[i])) {
+                    var res = ary.slice(0, i + 1)
+                    break
+                }
+            }
+            return res
+        }
+        function flatten(ary) {
+            return flattenDepth(ary, 1)
+        }
+        
+        function flatten(ary) {
+            var result = []
+            for (var item of ary) {
+                if (Array.isArray(item)) {
+                    result.push(...item)
+                } else {
+                    result.push(item)
+                }
+            }
+            return result
+        }
+        
+        function flatten(ary) { //[1,2,3,[4,5],[6,7]]
+            return [].concat(...ary)
+        }
+        
+        function flattenDepth(ary, depth) {
+            return Array(depth).fill(0).reduce((ary) => {
+                return flatten(ary)
+            }, ary.slice())
+        }
+        
+        function flattenDeep(ary) {
+            var result = []
+            for(var item of ary) {
+                if (Array.isArray(item)) {
+                    var flattedItem = flattenDeep(item)
+                    result.push(...flattedItem)
+                } else {
+                    result.push(item)
+                }
+            }
+            return result
+        }
+        
+        function flattenDeep(ary) {
+            return flattenDepth(ary, Infinity)
+        }
+        
+        function flattenDepth(ary, depth = 1) {
+            var result = []
+            for(var item of ary) {
+                if (Array.isArray(item)) {
+                    var flattedItem = flattenDepth(item, depth - 1)
+                    result.push(...flattedItem)
+                } else {
+                    result.push(item)
+                }
+            }
+            return result
+        }
+
+        输入：concat([1],2,[3],[[4]])
+输出/期望：[1,2,3,[4]]
+
+源码：
+function(array, ...value) {
+    var newArr = []
+    for (var item of arguments) {
+        if (Array.isArray(item)) {
+            newArr.push(...item)
+        } else {
+            newArr.push(item)
+        }
+    }
+    return newArr
+}
+function(value) {
+    return Object.prototype.toString.call(value) === "[object Array]";
+}
+function flattenDeep(ary) {
+    return flattenDepth(ary, Infinity)
+}
+
+function flattenDepth(ary, depth = 1) {
+    var result = []
+    for(var item of ary) {
+        if (Array.isArray(item)) {
+            var flattedItem = flattenDepth(item, depth - 1)
+            result.push(...flattedItem)
+        } else {
+            result.push(item)
+        }
+    }
+    return result
+}
+</body>
+</html>
