@@ -223,13 +223,14 @@ var yuhuiyolanda = {
      }
      return res 
    },
+
    max:function(array){
-     return array == []?undefined:array.reduce(function(a,b){
+     return array === [] ? undefined:array.reduce(function(a,b){
        if(a > b) {return a}else{return b}
      },-Infinity)
    },
    min:function(array){
-    return array == []?undefined:array.reduce(function(a,b){
+    return array === [] ? undefined:array.reduce(function(a,b){
       if(a > b) {return b}else{return a}
     },Infinity)
   },
@@ -289,7 +290,7 @@ Ite:function(value,other){
   return value <= other 
 },
 
-pad:function(string, length = 0, chars = ' '){
+pad:function(string = '', length = 0, chars = ' '){
    var left = ((length - string.length) / chars.length) | 0
    for(var i = 0;i < left;i++){
      string = chars + string 
@@ -308,15 +309,17 @@ padEnd:function(string, length = 0, chars = ' '){
   return string 
 },
 padStart:function(string, length = 0, chars = ' '){
-  while(string.length < length){
-    string = chars + string 
+  var times = Math.ceil((length - string.length)/chars.length)
+  var left = ''
+  for(var i = 0;i < times;i++){
+    left += chars 
   }
-  string = string.slice(string.length - length)
-  return string 
+  left = left.slice(0,length - string.length)
+  return left + string 
 }, 
 spread:function(func, start = 0){
   return function(ary){
-    return func(ary.apply(null,ary))
+    return func.apply(null,ary)
   }
 },
 //注意输出的是自己的而非原型的,可枚举的属性名
