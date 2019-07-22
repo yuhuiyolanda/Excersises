@@ -100,25 +100,25 @@ var yuhuiyolanda = {
       return value 
     },
     isArray: function(value){
-      return Object.prototype.toString.call(value) === "[Object Array]"
+      return Object.prototype.toString.call(value) === "[object Array]"
     },
     isArguments: function(value){
-      return Object.prototype.toString.call(value) === "[Object Arguments]"
+      return Object.prototype.toString.call(value) === "[object Arguments]"
     },
     isBoolean: function(value){
-      return Object.prototype.toString.call(value) === "[Object Boolean]"
+      return Object.prototype.toString.call(value) === "[object Boolean]"
     },
     isDate: function(value){
-      return Object.prototype.toString.call(value) === "[Object Date]"
+      return Object.prototype.toString.call(value) === "[object Date]"
     },
     isFunction: function(value){
-      return Object.prototype.toString.call(value) === "[Object Function]"
+      return Object.prototype.toString.call(value) === "[object Function]"
     },
     isObject:function(value){
       return value instanceof Object 
     },
     isRegExp:function(value){
-      return Object.prototype.toString.call(value) === "[Object RegExp]"
+      return Object.prototype.toString.call(value) === "[object RegExp]"
     },
     isString: function(value){
       return  typeof value === 'string'
