@@ -225,12 +225,12 @@ var yuhuiyolanda = {
    },
 
    max:function(array){
-     return array === [] ? undefined:array.reduce(function(a,b){
+     return array.length === 0 ? undefined:array.reduce(function(a,b){
        if(a > b) {return a}else{return b}
      },-Infinity)
    },
    min:function(array){
-    return array === [] ? undefined:array.reduce(function(a,b){
+    return array.length === 0 ? undefined:array.reduce(function(a,b){
       if(a > b) {return b}else{return a}
     },Infinity)
   },
@@ -291,7 +291,7 @@ Ite:function(value,other){
 },
 
 pad:function(string = '', length = 0, chars = ' '){
-   var left = ((length - string.length) / chars.length) | 0
+   var left = Math.floor((Math.ceil((length - string.length) / chars.length) / 2))
    for(var i = 0;i < left;i++){
      string = chars + string 
    } 
