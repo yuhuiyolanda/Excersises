@@ -226,16 +226,57 @@ var yuhuiyolanda = {
    max:function(array){
      return array == []?undefined:array.reduce(function(a,b){
        if(a > b) {return a}else{return b}
-     })
+     },-Infinity)
    },
    min:function(array){
     return array == []?undefined:array.reduce(function(a,b){
       if(a > b) {return b}else{return a}
-    })
+    },Infinity)
   },
-  ceil:function(number,precision){
+  
+  ceil:function(number,precision = 0){
      return Math.ceil(number * 10 ** precision) /10 ** precision
+  },
+  
+
+toArray:function(value){
+var result = []
+if(typeof value === 'string'){
+  for(var i = 0;i < value.length;i++){
+    result.push(value[i])
   }
+}else if(typeof value === 'object'){
+  for(var key in value){
+    result.push(value[key])
+  }
+}
+return result 
+},
+escape: function(str){
+  var map = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    "'": "&#39;",
+    '"': "&quot;"
+  }
+  var res = ''
+  for(var i = 0;i < str.length;i++){
+    if(str[i] in map){
+      res += map[str[i]]
+    }else{
+      res += str[i]
+    }
+  }
+  return res 
+},
+repeat:function(str = '',n = 1){
+  var res = ''
+  for(var i = 0;i < n;i++){
+    res += str 
+  }
+  return res 
+},
   };
    
 
