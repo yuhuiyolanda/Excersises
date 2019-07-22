@@ -100,25 +100,25 @@ var yuhuiyolanda = {
       return value 
     },
     isArray: function(value){
-      return Object.prototype.toString.call(value) === "[Object,Array]"
+      return Object.prototype.toString.call(value) === "[Object Array]"
     },
     isArguments: function(value){
-      return Object.prototype.toString.call(value) === "[Object,Arguments]"
+      return Object.prototype.toString.call(value) === "[Object Arguments]"
     },
     isBoolean: function(value){
-      return Object.prototype.toString.call(value) === "[Object,Boolean]"
+      return Object.prototype.toString.call(value) === "[Object Boolean]"
     },
     isDate: function(value){
-      return Object.prototype.toString.call(value) === "[Object,Date]"
+      return Object.prototype.toString.call(value) === "[Object Date]"
     },
     isFunction: function(value){
-      return Object.prototype.toString.call(value) === "[Object,Function]"
+      return Object.prototype.toString.call(value) === "[Object Function]"
     },
     isObject:function(value){
       return value instanceof Object 
     },
     isRegExp:function(value){
-      return Object.prototype.toString.call(value) === "[Object,RegExp]"
+      return Object.prototype.toString.call(value) === "[Object RegExp]"
     },
     isString: function(value){
       return  typeof value === 'string'
@@ -277,6 +277,95 @@ repeat:function(str = '',n = 1){
   }
   return res 
 },
+flip:function(f){
+  return function(...args){
+    return f(...args.reverse())
+  }
+},
+It:function(value,other){
+   return value < other 
+},
+Ite:function(value,other){
+  return value <= other 
+},
+
+pad:function(string, length = 0, chars = ' '){
+   var left = ((length - string.length) / chars.length) | 0
+   for(var i = 0;i < left;i++){
+     string = chars + string 
+   } 
+   while(string.length < length){
+     string += chars 
+   }
+   string = string.slice(0,length)
+   return string 
+},
+padEnd:function(string, length = 0, chars = ' '){
+  while(string.length < length){
+    string += chars 
+  }
+  string = string.slice(0,length)
+  return string 
+},
+padStart:function(string, length = 0, chars = ' '){
+  while(string.length < length){
+    string = chars + string 
+  }
+  string = string.slice(string.length - length)
+  return string 
+}, 
+spread:function(func, start = 0){
+  return function(ary){
+    return func(ary.apply(null,ary))
+  }
+},
+//注意输出的是自己的而非原型的,可枚举的属性名
+//使用for-in循环,遍历的是可枚举的属性名,不论是原型里的还是自身实例中
+//使用Object.hasOwnProperty(),检测该属性存在于原型中,还是实例中
+//以上两个结合,就能够筛选出来符合以下要求的属性
+//Creates an array of the own enumerable property names of object.
+// 输入：keys({"a":1,"b":2})
+// 输出/期望：["a","b"]
+// 输入：keys("hi")
+// 输出/期望：["0","1"]
+
+keys:function(object){
+  var res = []
+  for(var key in object){
+    if(object.hasOwnProperty(key)){
+      res.push(key)
+    }
+  }
+  return res 
+},
+
+pick:function(object, paths) {
+  var res = {}
+  for(var key in object){
+    if(paths.includes(key)){
+       res[key] = object[key]
+    }
+  }
+  return res 
+},
+add:function(augend, addend){
+  return augend + addend
+},
+isError:function(value){
+  return value instanceof Error 
+},
+defaults:function(object,...args){
+  for(var arg of args){
+    //遍历参数 for-of 
+    for(var key in arg){
+      if(!(key in object)){
+        object[key] = arg[key]
+      }
+    }
+  }
+  return object
+},
+
   };
    
 
