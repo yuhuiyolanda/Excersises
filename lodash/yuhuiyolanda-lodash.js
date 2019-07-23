@@ -322,15 +322,7 @@ spread:function(func, start = 0){
     return func.apply(null,ary)
   }
 },
-//注意输出的是自己的而非原型的,可枚举的属性名
-//使用for-in循环,遍历的是可枚举的属性名,不论是原型里的还是自身实例中
-//使用Object.hasOwnProperty(),检测该属性存在于原型中,还是实例中
-//以上两个结合,就能够筛选出来符合以下要求的属性
-//Creates an array of the own enumerable property names of object.
-// 输入：keys({"a":1,"b":2})
-// 输出/期望：["a","b"]
-// 输入：keys("hi")
-// 输出/期望：["0","1"]
+
 
 keys:function(object){
   var res = []
@@ -377,10 +369,9 @@ forOwn:function(obj, iterator=_.identity){
      }
    }
 },
-
  differenceBy:function(array,...values){   
    if(Array.isArray(values[values.length - 1])){
-     return difference(array,...values)
+     return this.difference(array,...values)
    }
     var values = [].concat(...values)
     var iteratee = values.pop()
