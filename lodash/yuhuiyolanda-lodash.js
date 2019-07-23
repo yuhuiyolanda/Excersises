@@ -388,7 +388,13 @@ forOwn:function(obj, iterator=_.identity){
    return array.filter(it => !values.some(val => comparator(val,it)))
  },
 
-
+ dropRight:function(array,n = 1){
+   var targetlen = array.length - n 
+   while(array.length > targetlen){
+     array.pop()
+   }
+   return array 
+ },
 
   };
    
