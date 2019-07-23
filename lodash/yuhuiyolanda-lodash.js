@@ -362,9 +362,9 @@ defaults:function(object,...args){
 },
 
 forOwn:function(obj, iterator=_.identity){
-   var hasOwn = Object.prototype.hasOwnProperty
+   var hasown = Object.prototype.hasOwnProperty
    for(var key in obj){
-     if(hasOwn.call(obj, key)){
+     if(hasown.call(obj, key)){
        iterator(obj[key],key,obj)
      }
    }
