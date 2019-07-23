@@ -389,11 +389,8 @@ forOwn:function(obj, iterator=_.identity){
  },
 
  dropRight:function(array,n = 1){
-   var targetlen = array.length - n 
-   while(array.length > targetlen){
-     array.pop()
-   }
-   return array 
+   if(n >= array.length) return []
+   return  array.slice(0,array.length - n)
  },
 
   };
