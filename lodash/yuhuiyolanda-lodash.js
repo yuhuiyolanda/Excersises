@@ -369,6 +369,36 @@ defaults:function(object,...args){
   return object
 },
 
+forOwn:function(obj, iterator=_.identity){
+   var hasOwn = Object.prototype.hasOwnProperty
+   for(var key in obj){
+     if(hasOwn.call(obj, key)){
+       iterator(obj[key],key,obj)
+     }
+   }
+},
+
+ differenceBy:function(array,...values){   
+   if(Array.isArray(values[values.length - 1])){
+     return difference(array,...values)
+   }
+    var values = [].concat(...values)
+    var iteratee = values.pop()
+    if(typeof iteratee == 'function'){
+       return array.filter(it => !values.map(x => iteratee(x)).includes(iteratee(it)))
+     }
+    if(typeof iteratee == 'string'){
+       return array.filter(it => !values.map(x => x[iteratee]).includes(it[iteratee]))
+     }   
+ },
+ differenceWith:function(array,...values){
+   var values = [].concat(...values)
+   var comparator = values.pop()
+   return array.filter(it => !values.some(val => comparator(val,it)))
+ },
+
+
+
   };
    
 
