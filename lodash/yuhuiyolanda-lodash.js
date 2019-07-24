@@ -392,29 +392,6 @@ forOwn:function(obj, iterator=_.identity){
    if(n >= array.length) return []
    return  array.slice(0,array.length - n)
  },
-//  输入：dropRightWhile([{"user":"barney","active":true},{"user":"fred","active":false},{"user":"pebbles","active":false}],"function(o)  { \n        return  !o.active; \n      }")
-// 输出/期望：[{"user":"barney","active":true}]
-//函数为真的去掉
-// =================
-// 输入：dropRightWhile([{"user":"barney","active":true},{"user":"fred","active":false},{"user":"pebbles","active":false}],{"user":"pebbles","active":false})
-// 输出/期望：[{"user":"barney","active":true},{"user":"fred","active":false}]
-//对象:相同的对象去掉
-// =================
-// 输入：dropRightWhile([{"user":"barney","active":true},{"user":"fred","active":false},{"user":"pebbles","active":false}],["active",false])
-// 输出/期望：[{"user":"barney","active":true}]
-
-//数组:属性为false相同的去掉
-// =================
-// 输入：dropRightWhile([{"user":"barney","active":true},{"user":"fred","active":false},{"user":"pebbles","active":false}],"active")
-// 输出/期望：[{"user":"barney","active":true},{"user":"fred","active":false},{"user":"pebbles","active":false}]
-
-//字符串:有这个属性就保留
-// function dropRightWhile(array, predicate) {
-//   predicate = iteratee(predicate)
-//   for (var i = array.length - 1; i >= 0; i--) {
-//       if (!predicate(array[i])) return array.slice(0, i + 1)
-//   }
-// }
 
  dropRightWhile:function(array,predicate){
      if(Array.isArray(predicate)){
@@ -448,6 +425,51 @@ forOwn:function(obj, iterator=_.identity){
   },
   dropWhile:function(array,predicate){
      return this.dropRightWhile(array.reverse(),predicate).reverse() 
+  },
+//   输入：findIndex([{"user":"barney","active":false},{"user":"fred","active":false},{"user":"pebbles","active":true}],"function(o)  { \n        return  o.user  ==  'barney'; \n      }")
+// 输出/期望：0
+//函数:输出函数返回为真的index
+// =================
+// 输入：findIndex([{"user":"barney","active":false},{"user":"fred","active":false},{"user":"pebbles","active":true}],{"user":"fred","active":false})
+// 输出/期望：1
+//对象,输出一模一样的对象的index
+// =================
+// 输入：findIndex([{"user":"barney","active":false},{"user":"fred","active":false},{"user":"pebbles","active":true}],["active",false])
+// 输出/期望：0
+// =================
+//数组,输出最早的属性和属性名相同的
+// 输入：findIndex([{"user":"barney","active":false},{"user":"fred","active":false},{"user":"pebbles","active":true}],"active")
+// 输出/期望：2
+//字符串,输出字符串属性名为真的
+  findIndex:function(array,predicate,fromindex = 0){
+    if(Array.isArray(predicate)){
+      for(var i = fromindex;i < array.length;i++){
+        if(array[i][predicate[0]] == predicate[1]){
+        return i 
+        }   
+      }
+    }
+    if(typeof predicate == 'function'){
+     for(var i = fromindex;i < array.length;i++){
+       if(predicate(array[i])){
+       return i  
+       }   
+     }
+    }
+    if(typeof predicate == 'string'){
+     for(var i = fromindex;i < array.length;i++){
+      if(array[i][predicate]){
+      return i 
+      }
+     }
+    }
+    if(typeof predicate == 'object'){
+     for(var i = fromindex;i < array.length;i++){
+       if(JSON.stringify(array[i]) == JSON.stringify(predicate) ){
+        return i 
+       }
+      }
+    }
   },
 };
    
