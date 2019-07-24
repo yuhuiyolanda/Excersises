@@ -392,8 +392,62 @@ forOwn:function(obj, iterator=_.identity){
    if(n >= array.length) return []
    return  array.slice(0,array.length - n)
  },
+//  输入：dropRightWhile([{"user":"barney","active":true},{"user":"fred","active":false},{"user":"pebbles","active":false}],"function(o)  { \n        return  !o.active; \n      }")
+// 输出/期望：[{"user":"barney","active":true}]
+//函数为真的去掉
+// =================
+// 输入：dropRightWhile([{"user":"barney","active":true},{"user":"fred","active":false},{"user":"pebbles","active":false}],{"user":"pebbles","active":false})
+// 输出/期望：[{"user":"barney","active":true},{"user":"fred","active":false}]
+//对象:相同的对象去掉
+// =================
+// 输入：dropRightWhile([{"user":"barney","active":true},{"user":"fred","active":false},{"user":"pebbles","active":false}],["active",false])
+// 输出/期望：[{"user":"barney","active":true}]
 
-  };
+//数组:属性为false相同的去掉
+// =================
+// 输入：dropRightWhile([{"user":"barney","active":true},{"user":"fred","active":false},{"user":"pebbles","active":false}],"active")
+// 输出/期望：[{"user":"barney","active":true},{"user":"fred","active":false},{"user":"pebbles","active":false}]
+
+//字符串:有这个属性就保留
+// function dropRightWhile(array, predicate) {
+//   predicate = iteratee(predicate)
+//   for (var i = array.length - 1; i >= 0; i--) {
+//       if (!predicate(array[i])) return array.slice(0, i + 1)
+//   }
+// }
+
+ dropRightWhile:function(array,predicate){
+     if(Array.isArray(predicate)){
+       for(var i = array.length - 1;i >= 0;i--){
+         if(array[i][predicate[0]] != predicate[1]){
+         return array.slice(0,i + 1)   
+         }   
+       }
+     }
+     if(typeof predicate == 'function'){
+      for(var i = array.length - 1;i >= 0;i--){
+        if(!predicate(array[i])){
+        return array.slice(0,i + 1)   
+        }   
+      }
+     }
+     if(typeof predicate == 'string'){
+      for(var i = array.length - 1;i >= 0;i--){
+       if(!array[i][predicate]){
+       return  array.slice(0,i + 1)
+       }
+      }
+     }
+     if(typeof predicate == 'object'){
+      for(var i = array.length - 1;i >= 0;i--){
+        if(JSON.stringify(array[i]) != JSON.stringify(predicate) ){
+         return array.slice(0,i + 1)
+        }
+       }
+     }
+  },
+
+};
    
 
 
