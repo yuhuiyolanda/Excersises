@@ -457,6 +457,85 @@ forOwn:function(obj, iterator=_.identity){
       }
     }
   },
+  findLastIndex:function(array,predicate,fromindex = array.length - 1){
+    if(Array.isArray(predicate)){
+      for(var i = fromindex;i >= 0;i--){
+        if(array[i][predicate[0]] == predicate[1]){
+        return i 
+        }   
+      }
+    }
+    if(typeof predicate == 'function'){
+     for(var i = fromindex;i >= 0;i--){
+       if(predicate(array[i])){
+       return i  
+       }   
+     }
+    }
+    if(typeof predicate == 'string'){
+     for(var i = fromindex;i >= 0;i--){
+      if(array[i][predicate]){
+      return i 
+      }
+     }
+    }
+    if(typeof predicate == 'object'){
+     for(var i = fromindex;i >= 0;i--){
+       if(JSON.stringify(array[i]) == JSON.stringify(predicate) ){
+        return i 
+       }
+      }
+    }
+  },
+
+  intersectionBy:function(ary,...arrs){
+    var arrs = [].concat(...arrs)
+    if(typeof arrs[arrs.length - 1] == 'string'){
+      iteratee = arrs.pop()
+      return ary.filter(item => arrs.map(x => x[iteratee]).includes(item[iteratee]) )}
+    else if(typeof arrs[arrs.length - 1] === 'function'){
+      iteratee = arrs.pop()
+      return ary.filter(item => arrs.map(x => iteratee(x)).includes(iteratee(item)))
+    }else{
+      iteratee = this.identity
+      return ary.filter(item => arrs.map(x => iteratee(x)).includes(iteratee(item)))
+    }
+  },
+  intersectionWith:function(array,other,comparator){
+    array.filter(item => { 
+      for(var i = 0;i < other.length;i++){
+        if(comparator(item,other[i])){
+          return true 
+        }
+      }
+      return false 
+    })
+  },
+  lastIndexOf:function(array,value,fromIndex=array.length-1){
+     for(var i = fromIndex;i >=0;i--){
+       if(array[i] == value){
+         return i 
+       }
+     }
+     return -1
+  },
+  nth:function(array, n = 0){
+    if(n >= 0){
+      return array[n]
+    }else{
+      return array[array.length + n]
+    }
+  },
+  pullAll(array,vals){
+    return array.filter(item => {
+      for(var i = 0;i < vals.length;i++){
+        if(item == vals[i]){
+          return false 
+        }
+      }
+      return true 
+    })
+  },
 };
    
 
