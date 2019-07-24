@@ -446,7 +446,9 @@ forOwn:function(obj, iterator=_.identity){
        }
      }
   },
-
+  dropWhile:function(array,predicate){
+     return this.dropRightWhile(array.reverse(),predicate).reverse() 
+  },
 };
    
 
