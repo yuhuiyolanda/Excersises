@@ -426,21 +426,7 @@ forOwn:function(obj, iterator=_.identity){
   dropWhile:function(array,predicate){
      return this.dropRightWhile(array.reverse(),predicate).reverse() 
   },
-//   输入：findIndex([{"user":"barney","active":false},{"user":"fred","active":false},{"user":"pebbles","active":true}],"function(o)  { \n        return  o.user  ==  'barney'; \n      }")
-// 输出/期望：0
-//函数:输出函数返回为真的index
-// =================
-// 输入：findIndex([{"user":"barney","active":false},{"user":"fred","active":false},{"user":"pebbles","active":true}],{"user":"fred","active":false})
-// 输出/期望：1
-//对象,输出一模一样的对象的index
-// =================
-// 输入：findIndex([{"user":"barney","active":false},{"user":"fred","active":false},{"user":"pebbles","active":true}],["active",false])
-// 输出/期望：0
-// =================
-//数组,输出最早的属性和属性名相同的
-// 输入：findIndex([{"user":"barney","active":false},{"user":"fred","active":false},{"user":"pebbles","active":true}],"active")
-// 输出/期望：2
-//字符串,输出字符串属性名为真的
+
   findIndex:function(array,predicate,fromindex = 0){
     if(Array.isArray(predicate)){
       for(var i = fromindex;i < array.length;i++){
