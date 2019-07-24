@@ -502,7 +502,7 @@ forOwn:function(obj, iterator=_.identity){
     }
   },
   intersectionWith:function(array,other,comparator){
-    array.filter(item => { 
+    return array.filter(item => { 
       for(var i = 0;i < other.length;i++){
         if(comparator(item,other[i])){
           return true 
@@ -526,7 +526,7 @@ forOwn:function(obj, iterator=_.identity){
       return array[array.length + n]
     }
   },
-  pullAll(array,vals){
+  pullAll:function(array,vals){
     return array.filter(item => {
       for(var i = 0;i < vals.length;i++){
         if(item == vals[i]){
@@ -535,6 +535,9 @@ forOwn:function(obj, iterator=_.identity){
       }
       return true 
     })
+  },
+  unzip:function(arr){
+
   },
 };
    
