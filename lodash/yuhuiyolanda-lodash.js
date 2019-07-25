@@ -565,38 +565,62 @@ forOwn:function(obj, iterator=_.identity){
    return res 
   },
   sortedIndexOf:function(array,value){ 
-   //用二分法,注意审题:it performs a binary search on a sorted array.
+   //用变种二分法,注意审题:it performs a binary search on a sorted array.
     var left = 0
     var right = array.length - 1
     while(left <= right){
-      var mid = left + ((right - left) >> 1)
-      if(array[mid] == value){
-        return mid 
-      }else if(array[mid] > value){
-        left = mid + 1
-      }else{
-        right = mid - 1
+      var mid = (left + right) >> 2
+      if(array[mid] >= value){
+         right = mid - 1
+      }else if(array[mid] < value){
+         left = mid + 1 
       }
+    }
+    if(left < array.length && array[left] == value){
+      return left 
     }
     return -1
   },
-  sortedIndexBy:function(){
-
+  sortedIndexBy:function(arr,val,func){
+    if(typeof func == 'function'){
+      arr = arr.map(item => func(item))
+      val = func(val)
+    }
+    if(typeof func == 'string'){
+      arr = arr.map(item => item[func])
+      val = val[func]
+    }
+    return this.sortedIndex(arr,val)
   },
   sortedLastIndex:function(){
-
+    //value应该插入到哪个位置
   },
   sortedLastIndexBy:function(){
 
   },
-  sortedLastIndexOf:function(){
-
+  sortedLastIndexOf:function(array,value){
+     //用变种二分法
+     var left = 0
+     var right = array.length - 1
+     while(left <= right){
+       var mid = (left + right) >> 2
+       if(array[mid] > value){
+         right = mid - 1
+       }else if(array[mid] <= value){
+         left = mid + 1//不相等一定在mid位置的右边，相等时答案有可能是当前mid位置
+       }
+     }
+     if(right > 0 && array[right] == value){
+       return right 
+     }
+     return -1 
   },
-  sortedUniq:function(){
-
+  sortedUniq:function(array){
+   //filter是传递了三个参数的 array[i],index,array
+    array.filter((item,index) => item !== array[index + 1])
   },
-  sortedUniqBy:function(){
-
+  sortedUniqBy:function(array,func){
+    array.filter((item,index) => func(item) !== func(array[index + 1]))
   },
 };
    
