@@ -536,7 +536,66 @@ forOwn:function(obj, iterator=_.identity){
       return true 
     })
   },
+  pullAllBy:function(arr,vals,iteratee){
+    if(typeof iteratee == 'string'){
+      return arr.filter(item => !vals.map(x => x[iteratee]).includes(item[iteratee]))
+    }
+    if(typeof iteratee == 'function'){
+      return arr.filter(item => !vals.map(x => iteratee(x)).includes(iteratee(item)))
+    }
+  },
+  pullAllWith:function(arr,vals,func){
+    return arr.filter(item => {
+      for(var i = 0;i < vals.length;i++){
+        if(func(item,vals[i])){
+          return false 
+        }
+      }
+      return true 
+    })
+  },
   unzip:function(arr){
+    var res = []    
+      for(var j = 0;j < arr[0].length;j++){
+        res[j] = []
+        for(var i = 0;i < arr.length;i++){
+        res[j][i] = arr[i][j]
+      }
+    }
+   return res 
+  },
+  sortedIndexOf:function(array,value){ 
+   //用二分法,注意审题:it performs a binary search on a sorted array.
+    var left = 0
+    var right = array.length - 1
+    while(left <= right){
+      var mid = left + ((right - left) >> 1)
+      if(array[mid] == value){
+        return mid 
+      }else if(array[mid] > value){
+        left = mid + 1
+      }else{
+        right = mid - 1
+      }
+    }
+    return -1
+  },
+  sortedIndexBy:function(){
+
+  },
+  sortedLastIndex:function(){
+
+  },
+  sortedLastIndexBy:function(){
+
+  },
+  sortedLastIndexOf:function(){
+
+  },
+  sortedUniq:function(){
+
+  },
+  sortedUniqBy:function(){
 
   },
 };
