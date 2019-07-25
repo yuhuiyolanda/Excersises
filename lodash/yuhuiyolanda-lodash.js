@@ -617,10 +617,10 @@ forOwn:function(obj, iterator=_.identity){
   },
   sortedUniq:function(array){
    //filter是传递了三个参数的 array[i],index,array
-    array.filter((item,index) => item !== array[index - 1])
+    return array.filter((item,index) => item !== array[index + 1])
   },
   sortedUniqBy:function(array,func){
-    array.filter((item,index) => func(item) !== func(array[index - 1]))
+    return array.filter((item,index) => func(item) !== func(array[index - 1]))
   },
 };
    
