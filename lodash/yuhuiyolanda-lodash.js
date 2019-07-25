@@ -617,13 +617,35 @@ forOwn:function(obj, iterator=_.identity){
     return array.filter((item,index) => func(item) !== func(array[index - 1]))
   },
   sortedLastIndex:function(){
-    //value应该插入到哪个位置以保持升序
   },
   sortedLastIndexBy:function(){
 
   },
-  unionBy:function(){
 
+  unionBy:function(...args){
+    var arr = [].concat(...args)
+    var iteratee = arr.pop()
+    var map = []
+    var res = []
+    if(typeof iteratee == 'function'){
+      for(var item of arr){
+        if(!map.includes(iteratee(item))){
+          map.push(iteratee(item))
+          res.push(item)
+        }
+      }
+      return res 
+    }
+    if(typeof iteratee == 'string'){
+      for(var item of arr){
+        if(!map.includes(item[iteratee])){
+          map.push(item[iteratee])
+          res.push(item)
+        }
+      }
+      return res 
+    }
+   
   },
   uniq:function(array){
     var res = []
