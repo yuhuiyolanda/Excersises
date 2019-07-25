@@ -569,7 +569,7 @@ forOwn:function(obj, iterator=_.identity){
     var left = 0
     var right = array.length - 1
     while(left <= right){
-      var mid = (left + right) >> 2
+      var mid = (left + right) >> 1
       if(array[mid] >= value){
          right = mid - 1
       }else if(array[mid] < value){
@@ -593,7 +593,7 @@ forOwn:function(obj, iterator=_.identity){
     return this.sortedIndex(arr,val)
   },
   sortedLastIndex:function(){
-    //value应该插入到哪个位置
+    //value应该插入到哪个位置以保持升序
   },
   sortedLastIndexBy:function(){
 
@@ -603,24 +603,24 @@ forOwn:function(obj, iterator=_.identity){
      var left = 0
      var right = array.length - 1
      while(left <= right){
-       var mid = (left + right) >> 2
+       var mid = (left + right) >> 1
        if(array[mid] > value){
          right = mid - 1
        }else if(array[mid] <= value){
-         left = mid + 1//不相等一定在mid位置的右边，相等时答案有可能是当前mid位置
+         left = mid + 1
        }
      }
-     if(right > 0 && array[right] == value){
+     if(right >= 0 && array[right] == value){
        return right 
      }
      return -1 
   },
   sortedUniq:function(array){
    //filter是传递了三个参数的 array[i],index,array
-    array.filter((item,index) => item !== array[index + 1])
+    array.filter((item,index) => item !== array[index - 1])
   },
   sortedUniqBy:function(array,func){
-    array.filter((item,index) => func(item) !== func(array[index + 1]))
+    array.filter((item,index) => func(item) !== func(array[index - 1]))
   },
 };
    
