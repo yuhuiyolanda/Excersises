@@ -591,13 +591,7 @@ forOwn:function(obj, iterator=_.identity){
       val = val[func]
     }
     return this.sortedIndex(arr,val)
-  },
-  sortedLastIndex:function(){
-    //value应该插入到哪个位置以保持升序
-  },
-  sortedLastIndexBy:function(){
-
-  },
+  },  
   sortedLastIndexOf:function(array,value){
      //用变种二分法
      var left = 0
@@ -622,6 +616,74 @@ forOwn:function(obj, iterator=_.identity){
   sortedUniqBy:function(array,func){
     return array.filter((item,index) => func(item) !== func(array[index - 1]))
   },
+  sortedLastIndex:function(){
+    //value应该插入到哪个位置以保持升序
+  },
+  sortedLastIndexBy:function(){
+
+  },
+  unionBy:function(){
+
+  },
+  uniq:function(){
+
+  },
+  uniqBy:function(){
+
+  },
+  zip:function(){
+
+  },
+  countBy:function(){
+
+  },
+  every:function(){
+
+  },
+  filter:function(){
+
+  },
+  find:function(){
+
+  },
+  flatMap:function(){
+
+  },
+  flatMapDepth:function(){
+
+  },
+  forEach:function(){
+
+  },
+  groupBy:function(){
+
+  },
+  keyBy:function(){
+
+  },
+  map:function(){
+
+  },
+  partition:function(){
+
+  },
+  reduce:function(){
+
+  },
+  reduceRight:function(){
+
+  },
+  reject:function(collection,predicate){
+    
+  },
+  sample:function(collection){
+       collection = Object.entries(collection)
+      //用Object.entries把数组/对象都变成二维数组
+       return collection[Math.floor(Math.random()*collection.length)][1]
+  },
+
+
+
 };
    
 
