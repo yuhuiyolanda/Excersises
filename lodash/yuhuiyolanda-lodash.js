@@ -625,14 +625,47 @@ forOwn:function(obj, iterator=_.identity){
   unionBy:function(){
 
   },
-  uniq:function(){
-
+  uniq:function(array){
+    var res = []
+    for(var i = 0;i < array.length;i++){
+      if(!res.includes(array[i])){
+        res.push(array[i])
+      }
+    }
+    return res 
   },
-  uniqBy:function(){
 
+  uniqBy:function(array,iteratee){
+    var res = []
+    var map = []
+    if(typeof iteratee == 'string'){
+      for(var item of array){
+        if(!map.includes(item[iteratee])){
+          map.push(item[iteratee])
+          res.push(item)
+        }
+      }
+      return res 
+    }else{
+       for(var item of array){
+         if(!map.includes(iteratee(item))){
+           map.push(iteratee(item))
+           res.push(item)
+         }
+       }
+       return res 
+    }   
   },
-  zip:function(){
-
+  zip:function(...arrays){
+    var arr = [].push(...arrays)
+    var res = []
+    for(var i = 0;i < arr[0].length;i++){
+       res[i] = []
+       for(var j = 0;j < arr.length;j++){
+         res[i][j] = arr[j][i]
+       }
+    }
+    return res 
   },
   countBy:function(){
 
