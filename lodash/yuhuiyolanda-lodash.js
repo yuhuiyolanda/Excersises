@@ -679,9 +679,8 @@ forOwn:function(obj, iterator=_.identity){
   sample:function(collection){
        collection = Object.entries(collection)
       //用Object.entries把数组/对象都变成二维数组
-       return collection[Math.floor(Math.random()*collection.length)][1]
+       return collection[Math.floor(Math.random() * collection.length)][1]
   },
-
 
 
 };
