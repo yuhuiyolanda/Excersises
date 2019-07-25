@@ -657,7 +657,8 @@ forOwn:function(obj, iterator=_.identity){
     }   
   },
   zip:function(...arrays){
-    var arr = [].push(...arrays)
+    var arr = []
+    arr.push(...arrays)
     var res = []
     for(var i = 0;i < arr[0].length;i++){
        res[i] = []
