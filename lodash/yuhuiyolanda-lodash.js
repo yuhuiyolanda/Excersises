@@ -722,7 +722,7 @@ forOwn:function(obj, iterator=_.identity){
      return true 
   },
   filter:function(collection, predicate = _.identity){
-    var func = this.iteratee(predicate)
+    var func = _.iteratee(predicate)
     var res = []
     for(var i = 0;i < collection.length;i++){
        if(func(collection[i],i,collection)){
@@ -732,7 +732,7 @@ forOwn:function(obj, iterator=_.identity){
     return res 
   },
   find:function(collection, predicate = _.identity, fromIndex = 0){
-    var func = this.iteratee(predicate)
+    var func = _.iteratee(predicate)
     for(var i = fromIndex;i < collection.length;i++){
        if(func(collection[i],i,collection)){
          return collection[i]
@@ -758,8 +758,8 @@ forOwn:function(obj, iterator=_.identity){
     }
     return collection
   },
-  groupBy:function(array,predicate){
-    var func = this.iteratee(predicate)
+  groupBy:function(array,predicate = _.identity){
+    var func = _.iteratee(predicate)
     var res = {}
     for(var i = 0;i < array.length;i++){
       if(!(func(array[i]) in res)){
@@ -771,16 +771,16 @@ forOwn:function(obj, iterator=_.identity){
     return res 
   },
 
-  keyBy:function(array,predicate){
-    var func = this.iteratee(predicate)
+  keyBy:function(array,predicate = _.identity){
+    var func = _.iteratee(predicate)
     var res = {}
     for(var i = 0;i < array.length;i++){
       res[func(array[i])] = array[i]
     }
     return res 
   },
-  map:function(collection,predicate){
-    var func = this.iteratee(predicate)
+  map:function(collection,predicate = _.identity){
+    var func = _.iteratee(predicate)
     var res =[]
     if(Array.isArray(collection)){
       for(var i = 0;i < collection.length;i++){
@@ -793,8 +793,8 @@ forOwn:function(obj, iterator=_.identity){
     }
     return res 
   },
-  partition:function(array,predicate){
-    var func = this.iteratee(predicate)
+  partition:function(array,predicate = _.identity){
+    var func = _.iteratee(predicate)
     var left = array.filter(item => func(item))
     var right = array.filter(item => !func(item))
     var res = []
@@ -828,8 +828,8 @@ forOwn:function(obj, iterator=_.identity){
       return len
     }    
   },
-  some:function(collection,predicate){
-    var func = this.iteratee(predicate)
+  some:function(collection,predicate = _.identity){
+    var func = _.iteratee(predicate)
     for(var i = 0;i < collection.length;i++){
       if(func(collection[i])){
         return true 
