@@ -712,8 +712,8 @@ forOwn:function(obj, iterator=_.identity){
   },
 
 
-  every:function(collection, predicate){
-     var predicate = iteratee(predicate)
+  every:function(collection, predicate = _.identity){
+     var predicate = _.iteratee(predicate)
      for(var i = 0;i < collection.length;i++){
        if(!predicate(collection[i],i,collection)){
          return false 
