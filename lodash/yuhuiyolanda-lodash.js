@@ -758,13 +758,13 @@ forOwn:function(obj, iterator=_.identity){
     return collection
   },
   groupBy:function(array,predicate = _.identity){
-    var func = _.iteratee(predicate)
+    var iteratee = _.iteratee(predicate)
     var res = {}
     for(var i = 0;i < array.length;i++){
-      if(!(func(array[i]) in res)){
-          res[func(array[i])] = array[i]
+      if(iteratee(array[i]) in res){          
+          res[iteratee(array[i])].push(array[i])
       }else{
-          res[func(array[i])].push(array[i])
+          res[iteratee(array[i])] = [array[i]]
       }
     }
     return res 
