@@ -711,7 +711,6 @@ forOwn:function(obj, iterator=_.identity){
 
   },
 
-
   every:function(collection, predicate = _.identity){
      var predicate = _.iteratee(predicate)
      for(var i = 0;i < collection.length;i++){
@@ -853,6 +852,73 @@ forOwn:function(obj, iterator=_.identity){
       return true 
     }    
   },
+  isMatch:function(object,source){
+    for(var key in source){
+      if(object[key] != source[key]){
+         return false
+      }else if(!this.isMatch(object[key],source[key])){
+        return false  
+      }
+    }
+    return true 
+  },
+  isNaN:function(val){
+    return Object.prototype.toString.call(val) === '[object Number]' && Number.isNaN(val)
+  },
+  isNil:function(val){
+    return val === undefined || val === null;
+  },
+  isNull:function(val){
+    return val === null
+  },
+  isNumber:function(val){
+    return Object.prototype.toString.call(value) === "[object Number]"
+  },
+  maxBy:function(array,predicate = _.identity){
+    var predicate = _.iteratee(predicate)
+    var max = -Infinity
+    var res
+    for(var i = 0;i < array.length;i++){
+       if(predicate(array[i]) > max){
+         max = predicate(array[i])
+         res = array[i]
+       }
+    }
+    return res 
+  },
+  functions:function(object){
+     var res = []
+     for(key in object){
+       if(object.hasOwnProperty(key)){
+         res.push(key)
+       }
+     }
+     return res 
+  },
+  mapKeys:function(object,func){
+     var res = {}
+     for(var key in object){
+       res[func(object[key],key,object)] = object[key]
+     }
+     return res 
+  },
+  mapValues:function(object,func = _.identity){
+    var res = {}
+    var iteratee = _.iteratee(func)
+    for(var key in object){
+      res[key] = iteratee(object[key])
+    }
+    return res 
+  },
+  toPairs:function(object){
+    var res = []
+    for(key in object){
+      if(object.hasOwnProperty(key)){
+        res.push([key,object[key]])
+      }
+    }
+    return res 
+  }
 };
    
 
