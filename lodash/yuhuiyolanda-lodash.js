@@ -711,17 +711,11 @@ forOwn:function(obj, iterator=_.identity){
 
   },
 
-// 关于iteratee方法
-// lodash中有很多方法都涉及到了数组或者对象的遍历，一般这些方法都可以传递自定义的遍历方法，
-// 自定义的遍历方法在普通情况下都传递的是function，但是lodash也支持传递一个数组、一个对象，或者一个字符串。
-// 这个iteratee方法的任务就是把一个数组，一个对象，或者一个字符串变成一个有效的function来遍历数组或对象找到符合要求的属性。
-//其中用到了isEqual方法来深度比较两个对象的值是否相等。
-//也用到了property将字符串或者字符串形式的属性路径变成一个获取对象的对应的属性的function。
-// iteratee 会传入3个参数：(value, index|key, collection)。 
-  every:function(collection, predicate = _.identity){
-     var func = this.iteratee(predicate)
+
+  every:function(collection, predicate){
+     var predicate = iteratee(predicate)
      for(var i = 0;i < collection.length;i++){
-       if(!func(collection[i],i,collection)){
+       if(!predicate(collection[i],i,collection)){
          return false 
        }
      }
