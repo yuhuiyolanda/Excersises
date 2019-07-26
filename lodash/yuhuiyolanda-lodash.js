@@ -201,11 +201,8 @@ var yuhuiyolanda = {
     return arr.filter(it => map[it] == 1)
    },
    range:function(start = 0,end,step = 1){
-     var res = []
-     for(var i = start;i < end;i+=step){
-       res.push(i)
-     }
-     return res 
+     
+     
    },
    omit:function(object,path){
      var res = {}
@@ -855,9 +852,7 @@ forOwn:function(obj, iterator=_.identity){
   },
   isMatch:function(object,source){
     for(var key in source){
-      if(object[key] != source[key]){
-         return false
-      }else if(!this.isMatch(object[key],source[key])){
+      if((object[key] !== source[key]) || (!this.isMatch(object[key],source[key]))){
         return false  
       }
     }
@@ -873,7 +868,7 @@ forOwn:function(obj, iterator=_.identity){
     return val === null
   },
   isNumber:function(val){
-    return Object.prototype.toString.call(value) === "[object Number]"
+    return Object.prototype.toString.call(val) === "[object Number]"
   },
   maxBy:function(array,predicate = _.identity){
     var predicate = _.iteratee(predicate)
@@ -919,7 +914,43 @@ forOwn:function(obj, iterator=_.identity){
       }
     }
     return res 
-  }
+  },
+  constant:function(val){
+    return function(){
+      return val 
+    }
+  },
+  times:function(n,func){
+    var res = []
+    for(var i = 0;i < n;i++){
+      res.push(func(i))
+    }
+    return res 
+  },
+  property:function(propertyName){
+    return function(obj){
+        return obj[propertyName]
+    }
+},
+  unescape:function(string = ""){
+      return str.replace("&amp;", "&").replace("&lt;", "<").replace("&gt;", ">").replace("&apos;", "'");
+  },
+  values:function(object){
+    var res = []
+    if(typeof object == 'string'){
+      for(var i = 0;i < object.length;i++){
+        res.push(object[i])
+      }
+      return res 
+    }else{
+      for(var key in object){
+        if(object.hasOwnProperty(key)){
+          res.push(object[key])
+        }
+      }
+      return res 
+    }
+  },
 };
    
 
