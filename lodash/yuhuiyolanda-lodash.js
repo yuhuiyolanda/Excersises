@@ -807,15 +807,16 @@ forOwn:function(obj, iterator=_.identity){
        return collection[Math.floor(Math.random() * collection.length)][1]
   },
   shuffle:function(array){
-    var res = []
-    var n = array.length
-    var i 
-    while(n){
-       i = Math.floor(Math.random() * n--)       
-       res.push(array.splice(i,1)[0])       
-    }
-    return res 
-  },
+      var m = array.length, t, i;
+      while (m) {
+        i = Math.floor(Math.random() * m--);
+        t = array[m];
+        array[m] = array[i];
+        array[i] = t;
+      }
+      return array;
+    },
+  
   size:function(collection){
     if(typeof collection == 'string' || Array.isArray(collection)){
       return collection.length
