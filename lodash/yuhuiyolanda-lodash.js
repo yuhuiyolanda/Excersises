@@ -933,7 +933,7 @@ forOwn:function(obj, iterator=_.identity){
     }
 },
   unescape:function(string = ""){
-      return str.replace("&amp;", "&").replace("&lt;", "<").replace("&gt;", ">").replace("&apos;", "'");
+      return string.replace("&amp;", "&").replace("&lt;", "<").replace("&gt;", ">").replace("&apos;", "'")
   },
   values:function(object){
     var res = []
