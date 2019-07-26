@@ -616,12 +616,7 @@ forOwn:function(obj, iterator=_.identity){
   sortedUniqBy:function(array,func){
     return array.filter((item,index) => func(item) !== func(array[index - 1]))
   },
-  sortedLastIndex:function(){
-  },
-  sortedLastIndexBy:function(){
-
-  },
-
+ 
   unionBy:function(...args){
     var arr = [].concat(...args)
     var iteratee = arr.pop()
@@ -690,38 +685,127 @@ forOwn:function(obj, iterator=_.identity){
     }
     return res 
   },
-  countBy:function(){
+
+  countBy:function(array,iteratee){
+    var res = {}
+    if(typeof iteratee == 'function'){
+       for(item of array){
+         if(!(iteratee(item) in res)){
+             res[iteratee(item)] = 1
+         }else{
+             res[iteratee(item)]++
+         }
+       }
+       return res 
+    }
+    if(typeof iteratee == 'string'){
+      for(item of array){
+        if(!(item[iteratee] in res)){
+           res[item[iteratee]] = 1
+        }else{
+          res[item[iteratee]]++
+        }
+      }
+      return res 
+    }
 
   },
-  every:function(){
 
+// 关于iteratee方法
+// lodash中有很多方法都涉及到了数组或者对象的遍历，一般这些方法都可以传递自定义的遍历方法，
+// 自定义的遍历方法在普通情况下都传递的是function，但是lodash也支持传递一个数组、一个对象，或者一个字符串。
+// 这个iteratee方法的任务就是把一个数组，一个对象，或者一个字符串变成一个有效的function来遍历数组或对象找到符合要求的属性。
+//其中用到了isEqual方法来深度比较两个对象的值是否相等。
+//也用到了property将字符串或者字符串形式的属性路径变成一个获取对象的对应的属性的function。
+// iteratee 会传入3个参数：(value, index|key, collection)。 
+  every:function(collection, predicate = _.identity){
+     var func = iteratee(predicate)
+     for(var i = 0;i < collection.length;i++){
+       if(!func(collection[i],i,collection)){
+         return false 
+       }
+     }
+     return true 
   },
-  filter:function(){
-
+  filter:function(collection, predicate = _.identity){
+    var func = iteratee(predicate)
+    var res = []
+    for(var i = 0;i < collection.length;i++){
+       if(func(collection[i],i,collection)){
+         res.push(collection[i])
+       }
+    }
+    return res 
   },
-  find:function(){
-
+  find:function(collection, predicate = _.identity, fromIndex = 0){
+    var func = iteratee(predicate)
+    for(var i = fromIndex;i < collection.length;i++){
+       if(func(collection[i],i,collection)){
+         return collection[i]
+       }
+    }
+    return undefined
   },
-  flatMap:function(){
-
+  flatMap:function(collection,func){
+    return this.flatten(collection.map(item => func(item)))
   },
-  flatMapDepth:function(){
-
+  flatMapDepth:function(collection, func, depth = 1){
+    return this.flattenDepth(collection.map(item => func(item)),depth) 
   },
-  forEach:function(){
-
+  forEach:function(collection, action){
+    if(Array.isArray(collection)){
+      for(var i = 0;i < collection.length;i++){
+        action(collection[i])
+      }
+    }else{
+      for(var key in collection){
+        action(collection[key], key)
+      }
+    }
+    return collection
   },
-  groupBy:function(){
-
+  groupBy:function(array,predicate){
+    var func = iteratee(predicate)
+    var res = {}
+    for(var i = 0;i < array.length;i++){
+      if(!(func(array[i]) in res)){
+          res[func(array[i])] = array[i]
+      }else{
+          res[func(array[i])].push(array[i])
+      }
+    }
+    return res 
   },
-  keyBy:function(){
 
+  keyBy:function(array,predicate){
+    var func = iteratee(predicate)
+    var res = {}
+    for(var i = 0;i < array.length;i++){
+      res[func(array[i])] = array[i]
+    }
+    return res 
   },
-  map:function(){
-
+  map:function(collection,predicate){
+    var func = iteratee(predicate)
+    var res =[]
+    if(Array.isArray(collection)){
+      for(var i = 0;i < collection.length;i++){
+        res.push(func(collection[i],i,collection))
+      }
+    }else{
+      for(var key in collection){
+        res.push(func(collection[key],key,collection))
+      }    
+    }
+    return res 
   },
-  partition:function(){
-
+  partition:function(array,predicate){
+    var func = iteratee(predicate)
+    var left = array.filter(item => func(item))
+    var right = array.filter(item => !func(item))
+    var res = []
+    res.push(left,right)
+    return res 
   },
   reduce:function(){
 
@@ -737,8 +821,66 @@ forOwn:function(obj, iterator=_.identity){
       //用Object.entries把数组/对象都变成二维数组
        return collection[Math.floor(Math.random() * collection.length)][1]
   },
-
-
+  shuffle:function(array){
+    var res = []
+    var n = array.length
+    var i 
+    while(n){
+       i = Math.floor(Math.random() * n--)       
+       res.push(array.splice(i,1)[0])       
+    }
+    return res 
+  },
+  size:function(collection){
+    if(typeof collection == 'string' || Array.isArray(collection)){
+      return collection.length
+    }else{
+      var len = 0
+      for(var key in collection){
+        len++
+      }
+      return len
+    }    
+  },
+  some:function(collection,predicate){
+    var func = iteratee(predicate)
+    for(var i = 0;i < collection.length;i++){
+      if(func(collection[i])){
+        return true 
+      }
+    }
+    return false     
+  },
+  sortBy:function(){
+    
+  },
+  defer:function(){
+    
+  },
+  delay:function(){
+    
+  },
+  isElement:function(){
+    
+  },
+  isEmpty:function(){
+    
+  },
+  isEqual:function(value,other){
+    if(typeof value == 'string' && typeof other == 'string'){
+      return value == other
+    }else{
+      return JSON.stringify(value) == JSON.stringify(other)
+    }
+  },
+  // 大于 MAX_VALUE 的值代表 "Infinity"
+  isFinite:function(value){
+    if(typeof value !== 'number' || value == Infinity || value == -Infinity){
+      return false
+    }else{
+      return true 
+    }    
+  },
 };
    
 
