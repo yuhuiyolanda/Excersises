@@ -807,15 +807,7 @@ forOwn:function(obj, iterator=_.identity){
     res.push(left,right)
     return res 
   },
-  reduce:function(){
-
-  },
-  reduceRight:function(){
-
-  },
-  reject:function(collection,predicate){
-    
-  },
+  
   sample:function(collection){
        collection = Object.entries(collection)
       //用Object.entries把数组/对象都变成二维数组
@@ -851,21 +843,7 @@ forOwn:function(obj, iterator=_.identity){
     }
     return false     
   },
-  sortBy:function(){
-    
-  },
-  defer:function(){
-    
-  },
-  delay:function(){
-    
-  },
-  isElement:function(){
-    
-  },
-  isEmpty:function(){
-    
-  },
+ 
   isEqual:function(value,other){
     if(typeof value == 'string' && typeof other == 'string'){
       return value == other
