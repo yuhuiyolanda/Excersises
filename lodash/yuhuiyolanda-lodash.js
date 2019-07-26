@@ -719,7 +719,7 @@ forOwn:function(obj, iterator=_.identity){
 //也用到了property将字符串或者字符串形式的属性路径变成一个获取对象的对应的属性的function。
 // iteratee 会传入3个参数：(value, index|key, collection)。 
   every:function(collection, predicate = _.identity){
-     var func = iteratee(predicate)
+     var func = this.iteratee(predicate)
      for(var i = 0;i < collection.length;i++){
        if(!func(collection[i],i,collection)){
          return false 
@@ -728,7 +728,7 @@ forOwn:function(obj, iterator=_.identity){
      return true 
   },
   filter:function(collection, predicate = _.identity){
-    var func = iteratee(predicate)
+    var func = this.iteratee(predicate)
     var res = []
     for(var i = 0;i < collection.length;i++){
        if(func(collection[i],i,collection)){
@@ -738,7 +738,7 @@ forOwn:function(obj, iterator=_.identity){
     return res 
   },
   find:function(collection, predicate = _.identity, fromIndex = 0){
-    var func = iteratee(predicate)
+    var func = this.iteratee(predicate)
     for(var i = fromIndex;i < collection.length;i++){
        if(func(collection[i],i,collection)){
          return collection[i]
@@ -765,7 +765,7 @@ forOwn:function(obj, iterator=_.identity){
     return collection
   },
   groupBy:function(array,predicate){
-    var func = iteratee(predicate)
+    var func = this.iteratee(predicate)
     var res = {}
     for(var i = 0;i < array.length;i++){
       if(!(func(array[i]) in res)){
@@ -778,7 +778,7 @@ forOwn:function(obj, iterator=_.identity){
   },
 
   keyBy:function(array,predicate){
-    var func = iteratee(predicate)
+    var func = this.iteratee(predicate)
     var res = {}
     for(var i = 0;i < array.length;i++){
       res[func(array[i])] = array[i]
@@ -786,7 +786,7 @@ forOwn:function(obj, iterator=_.identity){
     return res 
   },
   map:function(collection,predicate){
-    var func = iteratee(predicate)
+    var func = this.iteratee(predicate)
     var res =[]
     if(Array.isArray(collection)){
       for(var i = 0;i < collection.length;i++){
@@ -800,7 +800,7 @@ forOwn:function(obj, iterator=_.identity){
     return res 
   },
   partition:function(array,predicate){
-    var func = iteratee(predicate)
+    var func = this.iteratee(predicate)
     var left = array.filter(item => func(item))
     var right = array.filter(item => !func(item))
     var res = []
@@ -843,7 +843,7 @@ forOwn:function(obj, iterator=_.identity){
     }    
   },
   some:function(collection,predicate){
-    var func = iteratee(predicate)
+    var func = this.iteratee(predicate)
     for(var i = 0;i < collection.length;i++){
       if(func(collection[i])){
         return true 
