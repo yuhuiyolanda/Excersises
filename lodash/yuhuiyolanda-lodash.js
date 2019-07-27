@@ -1053,6 +1053,32 @@ forOwn:function(obj, iteratee=_.identity){
   delay:function(func, wait, ...rest) {
       return setTimeout(func(...rest),wait,...rest)
    },
+  propertyOf:function(obj){
+     return function(name){
+       return obj[name]
+     }
+  },
+  curry:function(fn, arity = fn.length) {
+    return function(...args){
+        if(args.length >= arity){
+            return fn(...args)
+        }
+        return function(...args2){
+            return curry(fn)(...args,...args2)
+        }
+    }
+  },
+  once:function(f){
+    var flag = true
+    var res
+    return function(...arg){
+      if(flag){
+        res = f(...arg)
+        flag = false
+      }
+      return res 
+    }    
+  },
 };
    
 
