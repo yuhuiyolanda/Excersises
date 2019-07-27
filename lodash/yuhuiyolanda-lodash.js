@@ -358,13 +358,17 @@ defaults:function(object,...args){
   return object
 },
 
-forOwn:function(obj, iterator=_.identity){
-   var hasown = Object.prototype.hasOwnProperty
-   for(var key in obj){
-     if(hasown.call(obj, key)){
-       iterator(obj[key],key,obj)
-     }
+forOwn:function(obj, iteratee=_.identity){
+   iteratee = _.iteratee(iteratee)
+   var keys = Object.keys(obj)
+   for(var i = 0;i < keys.length;i++){
+    if((iteratee(obj[keys[i]], keys[i], obj) === false)){
+      break 
+    }else{
+      iteratee(obj[keys[i]], keys[i], obj)
+    }
    }
+   return obj 
 },
  differenceBy:function(array,...values){   
    if(Array.isArray(values[values.length - 1])){
@@ -949,6 +953,73 @@ forOwn:function(obj, iterator=_.identity){
         }
       }
       return res 
+    }
+  },
+  findKey:function(obj,predicate = _.identity){
+      predicate = _.iteratee(predicate)
+      for(var key in obj){
+        if(predicate(obj[key])){
+          return key 
+        }
+      }
+  },
+  forIn:function(obj,predicate= _.identity){
+       predicate = _.iteratee(predicate)
+       for(var key in obj){
+         if(predicate([obj[key]],key,obj) === false){
+           break 
+         }else{
+          predicate([obj[key]],key,obj)
+         }
+       }
+       return obj 
+  },
+  forInRight:function(obj,predicate= _.identity){
+    predicate = _.iteratee(predicate)
+    var keys = []
+    for(var key in obj){
+      keys.push(key)
+    }
+    keys = keys.reverse()
+    for(var i = 0;i < keys.length;i++){
+      if(predicate(obj[keys[i]],keys[i],obj) === false){
+        break 
+      }else{
+        predicate(obj[keys[i]],keys[i],obj)
+      }
+    }
+    return obj 
+  },
+  forOwnRight:function(obj,iteratee = _.identity){
+       iteratee = _.iteratee(iteratee)
+       var keys = Object.keys(obj)
+       for (let i = keys.length - 1; i >= 0; i--) {
+         if(iteratee(obj[keys[i]],keys[i],obj) === false){
+           break 
+         }else{
+           iteratee(obj[keys[i]],keys[i],obj)
+         }
+       }
+       return obj;
+  },
+  memoize:function(f){
+    var cache = {}
+    return function(arg){
+       if(arg in cache){
+         return cache[arg]
+       }else{
+         return cache[arg] = f(arg)
+       }
+    }
+  },
+  matches:function(obj){
+    return function(src){
+      for(var key in src){
+        if(obj[key] != src[key]){
+          return false
+        }
+      }
+      return true 
     }
   },
 };
