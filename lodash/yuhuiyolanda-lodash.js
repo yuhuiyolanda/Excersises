@@ -1064,7 +1064,7 @@ forOwn:function(obj, iteratee=_.identity){
             return fn(...args)
         }
         return function(...args2){
-            return curry(fn)(...args,...args2)
+            return _.curry(fn)(...args,...args2)
         }
     }
   },
