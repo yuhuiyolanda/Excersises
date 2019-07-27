@@ -1022,6 +1022,37 @@ forOwn:function(obj, iteratee=_.identity){
       return true 
     }
   },
+  reduce:function(){
+
+  },
+  reduceRight:function(){
+
+  },
+  reject:function(){
+
+  },
+  sortBy:function(){
+
+  },
+
+  round:function(number,precision = 0){
+     var num = Math.floor(number * 10 * Math.pow(10,precision))
+     if(num % 10 >= 5){
+       return Math.floor(number * Math.pow(10,precision) + 1) / Math.pow(10,precision)
+     }
+     else{
+      return Math.floor(number * Math.pow(10,precision)) / Math.pow(10,precision)
+     }
+  },
+  defer:function(func,...rest){
+    return setTimeout(function(rest){
+      func(rest)
+    },1)
+  },
+ 
+  delay:function(func, wait, ...rest) {
+      return setTimeout(func(...rest),wait,...rest)
+   },
 };
    
 
