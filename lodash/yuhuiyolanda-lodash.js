@@ -863,7 +863,7 @@ forOwn:function(obj, iteratee=_.identity){
     return true 
   },
   isNaN:function(val){
-    return Object.prototype.toString.call(val) === '[object Number]' && Number.isNaN(val)
+    return Object.prototype.toString.call(val) === '[object Number]' && isNaN(val)
   },
   isNil:function(val){
     return val === undefined || val === null;
