@@ -1022,8 +1022,17 @@ forOwn:function(obj, iteratee=_.identity){
       return true 
     }
   },
-  reduce:function(){
-
+  reduce:function(collection, reducer = identity, accumulator){
+    var values = Object.values(collection)
+    var keys = Object.keys(collection)
+    if(accumulator === undefined){
+      accumulator = values.shift()
+      keys.shift()
+    }
+    for(var i = 0;i < keys.length;i++){
+      accumulator = reducer(accumulator,values[i],keys[i])
+    }
+    return accumulator
   },
   reduceRight:function(){
 
@@ -1078,6 +1087,25 @@ forOwn:function(obj, iteratee=_.identity){
       }
       return res 
     }    
+  },
+  assignIn:function(object, ...args){
+    for(var i = 0;i < args.length;i++){
+      for(var key in args[i]){
+        object[key] = args[i][key]
+      }
+    }
+    return object
+  },
+  sumBy:function(array,iteratee){
+    var res = 0
+    var iteratee = _.iteratee(iteratee)
+    for(var i = 0;i < array.length;i++){
+       res += iteratee(array[i])
+    }
+    return res 
+  },
+  isElement:function(value){
+    return Object.prototype.toString.call(value) === '[object HTMLBodyElement]'
   },
 };
    
