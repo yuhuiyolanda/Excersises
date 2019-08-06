@@ -943,7 +943,7 @@ forOwn:function(obj, iteratee=_.identity){
   },
   property:function(path){
     return function(obj){
-        return this.get(obj, path)
+        return yuhuiyolanda.get(obj, path)
     }
 },
   unescape:function(string = ""){
@@ -1025,7 +1025,7 @@ forOwn:function(obj, iteratee=_.identity){
   matches:function(src){
     //done
     return function(obj){
-      return this.isMatch(obj,src)
+      return yuhuiyolanda.isMatch(obj,src)
       //return bind(isMatch,null,_,src)
     }
   },
