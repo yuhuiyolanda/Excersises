@@ -1117,7 +1117,9 @@ forOwn:function(obj, iteratee=_.identity){
   },
   get:function(obj, path, defaultval){
     //done
-    var path = path.split(/\.|\[|\]./g)
+    if(typeof path == "string"){
+      path = path.split(/\.|\[|\]./g)
+    }    
     for(var i = 0;i < path.length;i++){
       if(obj === undefined){
         return defaultval
