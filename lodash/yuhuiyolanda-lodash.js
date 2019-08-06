@@ -855,9 +855,19 @@ forOwn:function(obj, iteratee=_.identity){
     }    
   },
   isMatch:function(object,source){
+    //done
+    if(object === source) {
+      return true
+    }
     for(var key in source){
-      if((object[key] !== source[key]) || (!this.isMatch(object[key],source[key]))){
-        return false  
+      if(typeof source[key] == "object" && source[key] != null){
+        if(!this.isMatch(object[key],source[key])){
+          return false 
+        }else{
+          if(source[key] != object[key]){
+            return false 
+          }
+        }
       }
     }
     return true 
@@ -931,9 +941,9 @@ forOwn:function(obj, iteratee=_.identity){
     }
     return res 
   },
-  property:function(propertyName){
+  property:function(path){
     return function(obj){
-        return obj[propertyName]
+        return get(obj, path)
     }
 },
   unescape:function(string = ""){
@@ -1012,14 +1022,11 @@ forOwn:function(obj, iteratee=_.identity){
        }
     }
   },
-  matches:function(obj){
-    return function(src){
-      for(var key in src){
-        if(obj[key] != src[key]){
-          return false
-        }
-      }
-      return true 
+  matches:function(src){
+    //done
+    return function(obj){
+      return isMatch(obj,src)
+      //return bind(isMatch,null,_,src)
     }
   },
   reduce:function(collection, reducer = identity, accumulator){
@@ -1063,18 +1070,19 @@ forOwn:function(obj, iteratee=_.identity){
       return setTimeout(func(...rest),wait,...rest)
    },
   propertyOf:function(obj){
-     return function(name){
-       return obj[name]
+    //done
+     return function(path){
+       return get(obj,path)
      }
   },
-  curry:function(fn, arity = fn.length) {
+  curry:function(f,length = f.length){
+    //done
     return function(...args){
-        if(args.length >= arity){
-            return fn(...args)
-        }
-        return function(...args2){
-            return _.curry(fn)(...args,...args2)
-        }
+      if(args.length >= length){
+        return f(...args)
+      }else{
+        return curry(f.bind(null,...args),length - args.length)
+      }
     }
   },
   once:function(f){
@@ -1107,6 +1115,22 @@ forOwn:function(obj, iteratee=_.identity){
   isElement:function(value){
     return Object.prototype.toString.call(value) === '[object HTMLBodyElement]'
   },
+  get:function(obj, path, defaultval){
+    //done
+    var path = toPath(path)
+    for(var i = 0;i < path.length;i++){
+      if(obj === undefined){
+        return defaultval
+      }
+      obj = obj[path[i]]
+    }
+    return obj 
+  },
+  toPath:function(str){
+    //done
+    return str.split(/\.|\[|\]./g)
+  }
+
 };
    
 
