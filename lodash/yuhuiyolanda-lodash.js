@@ -863,15 +863,15 @@ forOwn:function(obj, iteratee=_.identity){
       if(typeof source[key] == "object" && source[key] != null){
         if(!this.isMatch(object[key],source[key])){
           return false 
-        }else{
+        }
+      }else{
           if(source[key] != object[key]){
             return false 
           }
         }
       }
-    }
-    return true 
-  },
+      return true 
+    },
   isNaN:function(val){
     return Object.prototype.toString.call(val) === '[object Number]' && isNaN(val)
   },
@@ -943,7 +943,7 @@ forOwn:function(obj, iteratee=_.identity){
   },
   property:function(path){
     return function(obj){
-        return get(obj, path)
+        return this.get(obj, path)
     }
 },
   unescape:function(string = ""){
@@ -1025,7 +1025,7 @@ forOwn:function(obj, iteratee=_.identity){
   matches:function(src){
     //done
     return function(obj){
-      return isMatch(obj,src)
+      return this.isMatch(obj,src)
       //return bind(isMatch,null,_,src)
     }
   },
@@ -1081,7 +1081,7 @@ forOwn:function(obj, iteratee=_.identity){
       if(args.length >= length){
         return f(...args)
       }else{
-        return curry(f.bind(null,...args),length - args.length)
+        return _.curry(f.bind(null,...args),length - args.length)
       }
     }
   },
@@ -1117,7 +1117,7 @@ forOwn:function(obj, iteratee=_.identity){
   },
   get:function(obj, path, defaultval){
     //done
-    var path = toPath(path)
+    var path = this.toPath(path)
     for(var i = 0;i < path.length;i++){
       if(obj === undefined){
         return defaultval
@@ -1129,7 +1129,7 @@ forOwn:function(obj, iteratee=_.identity){
   toPath:function(str){
     //done
     return str.split(/\.|\[|\]./g)
-  }
+  },
 
 };
    
