@@ -1117,7 +1117,7 @@ forOwn:function(obj, iteratee=_.identity){
   },
   get:function(obj, path, defaultval){
     //done
-    var path = this.toPath(path)
+    var path = yuhuiyolanda.toPath(path)
     for(var i = 0;i < path.length;i++){
       if(obj === undefined){
         return defaultval
