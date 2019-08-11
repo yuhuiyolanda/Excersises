@@ -840,10 +840,12 @@ forOwn:function(obj, iteratee=_.identity){
   },
  
   isEqual:function(value,other){
+
       //===可比较字符串,数值,布尔值,null,undefined,不可比较数组,对象
-     if(value === other){
-         return true 
+     if(typeof value === "number" || typeof value === "string" || typeof value === "boolean"){
+        return value === other 
      }
+     
      if(Object.prototype.toString.call(value) !== Object.prototype.toString.call(other) ){
          return false 
      }
@@ -856,13 +858,17 @@ forOwn:function(obj, iteratee=_.identity){
          if(keys1.length !== keys2.length){
              return false 
          }
-         if(keys1 === 0){
+         if(keys1.length === 0){
              return true 
              //空对象情况
          }
          for(var key in value){
              if(typeof value[key] === "object"){
-                 return this.isEqual(value[key],other[key])
+                 if(this.isEqual(value[key],other[key])){
+                     continue
+                 }else{
+                     return false 
+                 }
              }
              else if(value[key] !== other[key]){
                  return false 
@@ -1079,7 +1085,7 @@ forOwn:function(obj, iteratee=_.identity){
     return accumulator
   },
   reject:function(collection,predicate){
-     var predicate = this.iteratee(predicate)
+     var predicate = yuhuiyolanda.iteratee(predicate)
      var ans = collection.slice()
     return ans.filter(item => !predicate(item))
   },
@@ -1190,7 +1196,7 @@ forOwn:function(obj, iteratee=_.identity){
           }
        }
        if(typeof arguments[1] == "number"){          
-          return lower + Math.random() * len 
+          return Math.floor(lower + Math.random() * len )
        }
      }
      if(arguments.length == 3){
