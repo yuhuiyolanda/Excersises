@@ -840,11 +840,36 @@ forOwn:function(obj, iteratee=_.identity){
   },
  
   isEqual:function(value,other){
-    if(typeof value == 'string' && typeof other == 'string'){
-      return value == other
-    }else{
-      return JSON.stringify(value) == JSON.stringify(other)
-    }
+      //===可比较字符串,数值,布尔值,null,undefined,不可比较数组,对象
+     if(value === other){
+         return true 
+     }
+     if(Object.prototype.toString.call(value) !== Object.prototype.toString.call(other) ){
+         return false 
+     }
+     //两者类型应一致,排除一个为数组,一个为对象的情况
+     var type = Object.prototype.toString.call(value)
+     if(type.includes("Array") || type.includes("Object")){
+         //若同为数组,或者同为对象
+         var keys1 = Object.keys(value)
+         var keys2 = Object.keys(other)
+         if(keys1.length !== keys2.length){
+             return false 
+         }
+         if(keys1 === 0){
+             return true 
+             //空对象情况
+         }
+         for(var key in value){
+             if(typeof value[key] === "object"){
+                 return this.isEqual(value[key],other[key])
+             }
+             else if(value[key] !== other[key]){
+                 return false 
+             }
+         }
+         return true 
+     }  
   },
   // 大于 MAX_VALUE 的值代表 "Infinity"
   isFinite:function(value){
@@ -1041,11 +1066,22 @@ forOwn:function(obj, iteratee=_.identity){
     }
     return accumulator
   },
-  reduceRight:function(){
-
+  reduceRight:function(collection, reducer = identity, accumulator){
+    var values = Object.values(collection)
+    var keys = Object.keys(collection)
+    if(accumulator === undefined){
+      accumulator = values.pop()
+      keys.pop()
+    }
+    for(var i = keys.length - 1;i >= 0;i--){
+      accumulator = reducer(accumulator,values[i],keys[i])
+    }
+    return accumulator
   },
-  reject:function(){
-
+  reject:function(collection,predicate){
+     var predicate = this.iteratee(predicate)
+     var ans = collection.slice()
+    return ans.filter(item => !predicate(item))
   },
   sortBy:function(){
 
@@ -1132,7 +1168,91 @@ forOwn:function(obj, iteratee=_.identity){
     //done
     return str.split(/\.|\[|\]./g)
   },
+  isEmpty:function(obj){
+    for(var key in obj){
+      if(obj.hasOwnProperty(key)){
+        return false  
+      }
+    }
+    return true  
+  },
+  random:function(lower=0, upper=1, floating){
+    var len = upper - lower
+     if(arguments.length == 1){
+        return Math.floor(Math.random() * arguments[0])
+     }
+     if(arguments.length == 2){
+       if(typeof arguments[1] == "boolean"){
+          if(arguments[1] === true){
+             return Math.random() * arguments[0]
+          }else{
+             return Math.floor(Math.random() * arguments[0])
+          }
+       }
+       if(typeof arguments[1] == "number"){          
+          return lower + Math.random() * len 
+       }
+     }
+     if(arguments.length == 3){
+        if(floating === true){
+          return lower + Math.random() * len 
+        }else{
+          return Math.floor(lower + Math.random() * len)
+        }
+     }
+  },
+  has:function(obj, path){
+     if(typeof path === "string"){
+       path = path.split(".")
+     }
+     for(var key of path){
+       if(!obj.hasOwnProperty(key)){
+         return false 
+       }else{
+         obj = obj[key]
+       }
+     }
+     return true 
+  },
+  invoke:function(obj,path,...args){
+    if(typeof path === "string"){
+      path = path.split(/\.|\[|\]./g)      
+    }
+    var func = path.pop()
+    for(var i = 0;i < path.length;i++){
+      obj = obj[i]
+    }
+    return obj[func](...args)   
+  },
+  merge:function(){
 
+  },
+  result:function(obj, path, defaultval){
+    path = path.split(/\.|\[|\]./g)
+    for(var i = 0;i < path.length;i++){
+      if(obj[path[i]] === undefined){
+        return typeof defaultval === "function" ? defaultval() : defaultval
+      }else if (typeof obj[path[i]] === "function"){
+         return obj[path[i]]()
+      }else{
+        obj = obj[path[i]]
+      }
+    }
+    return obj 
+  },
+  
+  range:function(){
+
+  },
+  mixin:function(){
+
+  },
+  uinqId:function(){
+
+  },
+  cloneDeep:function(){
+
+  },
 };
    
 
