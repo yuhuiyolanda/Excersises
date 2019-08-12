@@ -1195,8 +1195,11 @@ forOwn:function(obj, iteratee=_.identity){
              return Math.floor(Math.random() * arguments[0])
           }
        }
-       if(typeof arguments[1] == "number"){          
+       if(typeof arguments[1] == "number" && n == parseInt(n)){          
           return Math.floor(lower + Math.random() * len )
+       }
+       if(typeof arguments[1] == "number" && n != parseInt(n)){
+         return lower + Math.random() * len
        }
      }
      if(arguments.length == 3){
@@ -1221,14 +1224,14 @@ forOwn:function(obj, iteratee=_.identity){
      return true 
   },
   invoke:function(obj,path,...args){
-    if(typeof path === "string"){
-      path = path.split(/\.|\[|\]./g)      
-    }
-    var func = path.pop()
-    for(var i = 0;i < path.length;i++){
-      obj = obj[i]
-    }
-    return obj[func](...args)   
+      if (typeof path === "string") {
+          path = path.split(/\.|\[|\]./g)
+      }
+      var func = path.pop()
+      for (var i = 0; i < path.length; i++) {
+          obj = obj[path[i]]
+      }
+      return obj[func](...args)
   },
   merge:function(){
 
@@ -1246,7 +1249,16 @@ forOwn:function(obj, iteratee=_.identity){
     }
     return obj 
   },
-  
+  ary:function(func,n = func.length){
+     return function(...args){
+       return func(...args.slice(0,n))
+     }
+  },
+  unary:function(func){
+    return function(...args){
+      return func(...args.slice(0,1))
+    }
+ },
   range:function(){
 
   },
