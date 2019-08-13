@@ -70,7 +70,7 @@ var yuhuiyolanda = {
             if(fromIndex < 0) fromIndex = 0       
         }
         for(let i = fromIndex;i < array.length;i++){
-            if(array[i] === value){
+            if(this.sameValueZero(array[i],value)){
                 return i 
             }
         }
@@ -518,7 +518,7 @@ forOwn:function(obj, iteratee=_.identity){
   },
   lastIndexOf:function(array,value,fromIndex=array.length-1){
      for(var i = fromIndex;i >=0;i--){
-       if(array[i] === value){
+       if(this.sameValueZero(array[i],value)){
          return i 
        }
      }
