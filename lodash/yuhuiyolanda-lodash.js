@@ -64,11 +64,15 @@ var yuhuiyolanda = {
     head:function(array){
         return array[0]
       },
-    indexOf:function(array,value,fromIndex = 0){
-        for(i = fromIndex;i < array.length;i++){
-          if(array[i] === value){
-            return i  
-          }
+    indexOf:function(array, value, fromIndex = 0) {
+        if(fromIndex < 0){
+            fromIndex = array.length + fromIndex
+            if(fromIndex < 0) fromIndex = 0       
+        }
+        for(let i = fromIndex;i < array.length;i++){
+            if(array[i] === value){
+                return i 
+            }
         }
         return -1
     },
@@ -514,7 +518,7 @@ forOwn:function(obj, iteratee=_.identity){
   },
   lastIndexOf:function(array,value,fromIndex=array.length-1){
      for(var i = fromIndex;i >=0;i--){
-       if(array[i] == value){
+       if(array[i] === value){
          return i 
        }
      }
@@ -1089,10 +1093,7 @@ forOwn:function(obj, iteratee=_.identity){
      var ans = collection.slice()
     return ans.filter(item => !predicate(item))
   },
-  sortBy:function(){
-
-  },
-
+  
   round:function(number,precision = 0){
      var num = Math.floor(number * 10 * Math.pow(10,precision))
      if(num % 10 >= 5){
@@ -1183,33 +1184,33 @@ forOwn:function(obj, iteratee=_.identity){
     return true  
   },
   random:function(lower=0, upper=1, floating){
-    var len = upper - lower
-     if(arguments.length == 1){
-        return Math.floor(Math.random() * arguments[0])
-     }
-     if(arguments.length == 2){
-       if(typeof arguments[1] == "boolean"){
-          if(arguments[1] === true){
-             return Math.random() * arguments[0]
+      var len = upper - lower
+       if(arguments.length == 1){
+          return Math.floor(Math.random() * arguments[0])
+       }
+       if(arguments.length == 2){
+         if(typeof arguments[1] == "boolean"){
+            if(arguments[1] === true){
+               return Math.random() * arguments[0]
+            }else{
+               return Math.floor(Math.random() * arguments[0])
+            }
+         }
+         if(typeof arguments[1] == "number" && upper == parseInt(upper)){          
+            return Math.floor(lower + Math.random() * len )
+         }
+         if(typeof arguments[1] == "number" && upper != parseInt(upper)){
+           return lower + Math.random() * len
+         }
+       }
+       if(arguments.length == 3){
+          if(floating === true){
+            return lower + Math.random() * len 
           }else{
-             return Math.floor(Math.random() * arguments[0])
+            return Math.floor(lower + Math.random() * len)
           }
        }
-       if(typeof arguments[1] == "number" && n == parseInt(n)){          
-          return Math.floor(lower + Math.random() * len )
-       }
-       if(typeof arguments[1] == "number" && n != parseInt(n)){
-         return lower + Math.random() * len
-       }
-     }
-     if(arguments.length == 3){
-        if(floating === true){
-          return lower + Math.random() * len 
-        }else{
-          return Math.floor(lower + Math.random() * len)
-        }
-     }
-  },
+    },
   has:function(obj, path){
      if(typeof path === "string"){
        path = path.split(".")
@@ -1233,9 +1234,7 @@ forOwn:function(obj, iteratee=_.identity){
       }
       return obj[func](...args)
   },
-  merge:function(){
-
-  },
+  
   result:function(obj, path, defaultval){
     path = path.split(/\.|\[|\]./g)
     for(var i = 0;i < path.length;i++){
@@ -1271,6 +1270,13 @@ forOwn:function(obj, iteratee=_.identity){
   cloneDeep:function(){
 
   },
+  merge:function(){
+
+  },
+  sortBy:function(){
+
+  },
+
 };
    
 
